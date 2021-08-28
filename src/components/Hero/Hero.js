@@ -12,7 +12,7 @@ const Hero = (props) => (
       This is Vignesh!
     </SectionTitle>
     <SectionText>
-    The purpose of JavaScript Mastery is to help aspiring and established developers to take their development skills to the next level and build awesome apps.
+    I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
     </SectionText>
     <Button onClick={props.handleClick}>Get in touch!</Button>
   </LeftSection>

@@ -59,7 +59,7 @@ export const NavLink = styled.a`
   color: rgba(255, 255, 255, 0.75);
   transition: 0.4s ease;
   &:hover {
-    color: #fff;
+    color: red;
     opacity: 1;
     cursor: pointer;
   }
@@ -123,6 +123,7 @@ color: white;
 border-radius: 50px;
   padding: 8px;
 &:hover {
+    color:red;
     background-color: #212d45;
     transform: scale(1.2);
     cursor: pointer;

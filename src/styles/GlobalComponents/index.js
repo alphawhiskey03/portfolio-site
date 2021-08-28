@@ -82,6 +82,8 @@ export const SectionDivider = styled.div`
   height: 6px;
   border-radius: 10px;
   background-color: #fff;
+  margin-right:auto;
+  margin-left:auto;
   background: ${(props) => props.colorAlt ? 
     'linear-gradient(270deg, #F46737 0%, #945DD6 100%)' :
     'linear-gradient(270deg, #13ADC7 0%, #945DD6 100%)'};
@@ -209,7 +211,7 @@ export const ButtonFront = styled.button`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${({ alt }) => alt ? 'linear-gradient(270deg, #F46737 0%, #945DD6 100%)' : 'linear-gradient(270deg, #13ADC7 0%, #945DD6 100%)'};
+  background: ${({ alt }) => alt ? 'linear-gradient(270deg, #F46737 0%, #945DD6 100%)' : 'linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);'};
   opacity: ${({ disabled }) => disabled ? '.5' : '1'};
   transition: .4s ease;
   font-size: ${({ alt }) => alt ? '20px' : '24px'};
