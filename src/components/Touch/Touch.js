@@ -40,6 +40,7 @@ const Touch = () => {
                         <FormContent>
                         <FormInput 
                         name="from_email"
+                        type="email"
                         required/>
                         <FormLabel>Email</FormLabel>   
                         </FormContent>
