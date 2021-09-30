@@ -11,8 +11,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 margin-bottom:30px;
-margin-left:10px;
-margin-right:10px;
+
 `;
 
 export const FormTitle=styled.h1`
@@ -24,7 +23,7 @@ export const FormContent=styled.h1`
     position:relative;
     height:48px;
     margin-bottom:3rem;
-    padding:3rem;
+    
 `;
 
 export const FormInput=styled.input`
@@ -35,21 +34,26 @@ export const FormInput=styled.input`
     height:100%;
     font-size:red;
     border:1px solid red;
+    border-width:1.5px;
     border-radius:.5rem;
     outline:none;
     padding:1rem;
+    font-size:2rem;
     background:none;
     z-index:1;
     color:white;
-`;
+=`;
 export const FormTextArea=styled.textarea`
 position:absolute;
 top:0;
 left:0;
+font-size:2rem;
 width:100%;
+height:10rem;
 font-size:red;
 border:1px solid red;
 border-radius:.5rem;
+border-width:1.5px;
 outline:none;
 padding:1rem;
 background:none;
@@ -122,4 +126,9 @@ min-width:45rem;
 padding:4rem 2rem;
 border-radius:1rem;
 box-shadow:3px 3px 20px rgba(80, 78, 78, 0.5);
+
+@media ${props => props.theme.breakpoints.sm} {
+    min-width:39rem;
+    
+}
 `;

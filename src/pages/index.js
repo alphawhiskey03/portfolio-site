@@ -20,10 +20,10 @@ const Home = () => {
       <Projects />
       <Technologies />
       <Timeline />
-      <Acomplishments />
+      {/* <Acomplishments /> */}
       <Touch/>
     </Layout>
   );
 };
-
+  
 export default Home;

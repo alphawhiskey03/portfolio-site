@@ -1,10 +1,22 @@
 import React from 'react';
+import { useRouter } from 'next/router'
 
-import { Section, SectionText, SectionTitle } from '../../styles/GlobalComponents';
+
+import { Section, SectionText, SectionTitle ,SectionDivider} from '../../styles/GlobalComponents';
 import Button from '../../styles/GlobalComponents/Button';
 import { LeftSection } from './HeroStyles';
 
-const Hero = (props) => (
+const handleClick=()=>{
+  const router=useRouter();
+  router.push("#contact");
+}
+
+const Hero = (props) => {
+  const router=useRouter();
+  const handleClick=()=>{
+    router.push("#contact");
+  }
+  return(
   <Section row nopadding>
   <LeftSection>
     <SectionTitle main center>
@@ -14,10 +26,10 @@ const Hero = (props) => (
     <SectionText>
     I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
     </SectionText>
-    <Button onClick={props.handleClick}>Get in touch!</Button>
+    <Button onClick={handleClick}>Get in touch!</Button>
   </LeftSection>
 </Section>
 
-);
+  )};
 
 export default Hero;

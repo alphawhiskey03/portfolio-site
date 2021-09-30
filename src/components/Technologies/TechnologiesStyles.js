@@ -130,4 +130,45 @@ export const ListIcon = styled.img`
     height: 32px;
     margin-bottom: 0px;
   }
-`
+`;
+
+export const ListIcons=styled.div`
+display:flex;
+flex-direction:column;
+padding:0 2rem 2rem 0;
+
+`;
+export const Icon=styled.div`
+transform:translateY(10px);
+transition:all .5s ease;
+cursor:pointer;
+&:hover {
+  color:red;
+}
+
+`;
+export const IconText=styled.span`
+color:transparent;
+transform:translateY(-20px);
+transition:all .5s ease;
+${Icon}:hover +&{
+  color:white;
+  transform:translateY(10px);
+  transition:all .5s ease;
+  
+}
+`;
+export const IconContent=styled.div`
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+`;
+export const MainContainer=styled.div`
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+`;
+
+

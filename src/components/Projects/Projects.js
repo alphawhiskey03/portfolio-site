@@ -7,7 +7,8 @@ console.log(projects);
 
 const Projects = () => (
   <Section nopadding id='projects'>
-    <SectionDivider/>
+      <SectionDivider colorAlt/>
+
     <br/>
     <SectionTitle>Projects</SectionTitle>
     <GridContainer>
@@ -30,14 +31,14 @@ const Projects = () => (
             </TagList>
           </div>
           <UtilityList>
-            <ExternalLinks href={project.visit}>visit</ExternalLinks>
+            <ExternalLinks href={project.visit} target="_blank">visit</ExternalLinks>
           </UtilityList>
 
         </BlogCard>
       ))}
     </GridContainer>
     <br/>
-    <SectionDivider/>
+    <SectionDivider colorAlt/>
   </Section>
 
 );

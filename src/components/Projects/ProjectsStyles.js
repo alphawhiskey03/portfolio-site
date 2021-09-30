@@ -43,9 +43,11 @@ export const TitleContent = styled.div`
 export const HeaderThree = styled.h3`
   font-weight: 500;
   letter-spacing: 2px;
-  color: #9cc9e3;
+  background: linear-gradient(121.57deg, #FFFFFF 18.77%, rgba(255, 255, 255, 0.66) 60.15%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   padding: .5rem 0;
-  font-size: ${(props) => props.title ? '3rem' : '2rem'};
+  font-size: ${(props) => props.title ? '2rem' : '1rem'};
 `;
 
 export const Hr = styled.hr`
@@ -68,6 +70,8 @@ export const Intro = styled.div`
 
 
 export const CardInfo = styled.p`
+  display:flex;
+  justify:center;
   width: 100%;
   padding: 0 50px;
   color: #e4e6e7;
@@ -75,7 +79,8 @@ export const CardInfo = styled.p`
   line-height: 24px;
   text-align: justify;
   @media ${(props) => props.theme.breakpoints.sm} {
-    padding:.3rem
+    padding:1rem;
+
   
 }
 `;
