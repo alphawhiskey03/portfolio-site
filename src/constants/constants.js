@@ -14,7 +14,7 @@ export const projects = [
     image: '/images/onesoil.png',
     tags: ['MapBox', 'JavaScript'],
     source: 'https://google.com',
-    visit: 'https://google.com',
+    visit: 'https://onesoil.ai/en/',
     id: 1,
   },
   {
@@ -23,7 +23,7 @@ export const projects = [
       image: '/images/scalability.png',
       tags: ['JavaScript', 'Php','MySQL'],
     source: 'https://scalabilityengineers.com/',
-    visit: 'https://google.com',
+    visit: 'https://scalabilityengineers.com/',
     id: 2,
   },
   {
@@ -32,7 +32,7 @@ export const projects = [
     image: '/images/sr7.png',
     tags: ['Javascript', 'Php', 'MySQL'],
     source: 'https://google.com',
-    visit: 'https://google.com',
+    visit: 'http://www.swetharaju7.com/',
     id: 3,
   },
 ];
