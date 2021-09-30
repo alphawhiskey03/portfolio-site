@@ -8,21 +8,25 @@ import Timeline from '../components/TimeLine/TimeLine';
 import Touch from '../components/Touch/Touch'
 import { Layout } from '../layout/Layout';
 import { Section } from '../styles/GlobalComponents';
+import {Head} from 'next/head'
 
 
 const Home = () => {
   return (
+    <>
+
     <Layout>
       <Section grid>
         <Hero />
         <BgAnimation />
       </Section>
-      <Projects />
       <Technologies />
+      <Projects />
       <Timeline />
       {/* <Acomplishments /> */}
       <Touch/>
     </Layout>
+    </>
   );
 };
   

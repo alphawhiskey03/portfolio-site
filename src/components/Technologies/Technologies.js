@@ -2,6 +2,8 @@ import React from 'react';
 import { DiFirebase, DiReact, DiBootstrap ,DiPhp ,DiMongodb,DiMysql,DiGit} from 'react-icons/di';
 import { IoLogoFirebase, IoLogoJavascript,IoLogoNodejs ,IoLogoPython} from "react-icons/io5";
 import { SiMaterialUi ,SiNextDotJs,SiJsonwebtokens} from "react-icons/si";
+import {SiRedux} from "react-icons/si";
+import Head from "next/head";
 
 
 import { Section, SectionDivider, SectionText, SectionTitle } from '../../styles/GlobalComponents';
@@ -20,7 +22,7 @@ const Technologies = () =>  (
     <ListIcons><IconContent><Icon><DiReact size='6rem'/></Icon><IconText>React.js</IconText></IconContent></ListIcons>
     <ListIcons><IconContent><Icon><DiBootstrap size='6rem'/></Icon><IconText>Bootstrap</IconText></IconContent></ListIcons>
     <ListIcons><IconContent><Icon><SiMaterialUi size='6rem'/></Icon><IconText>Material UI</IconText> </IconContent></ListIcons>
-    <ListIcons><IconContent><Icon><SiNextDotJs size='6rem'/></Icon><IconText>Next.js</IconText> </IconContent></ListIcons>
+    <ListIcons><IconContent><Icon><SiRedux size='6rem'/></Icon><IconText>Redux</IconText> </IconContent></ListIcons>
     <ListIcons><IconContent><Icon><IoLogoJavascript size='6rem'/></Icon><IconText>JavaScript</IconText> </IconContent></ListIcons>
     
     

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router'
-
-
+import {Head} from "next/head";
 import { Section, SectionText, SectionTitle ,SectionDivider} from '../../styles/GlobalComponents';
 import Button from '../../styles/GlobalComponents/Button';
 import { LeftSection } from './HeroStyles';
@@ -17,6 +16,7 @@ const Hero = (props) => {
     router.push("#contact");
   }
   return(
+    <>
   <Section row nopadding>
   <LeftSection>
     <SectionTitle main center>
@@ -29,6 +29,7 @@ const Hero = (props) => {
     <Button onClick={handleClick}>Get in touch!</Button>
   </LeftSection>
 </Section>
+</>
 
   )};
 

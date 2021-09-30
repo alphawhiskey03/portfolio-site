@@ -22,14 +22,14 @@ const Projects = () => (
             <Hr/>
           </TitleContent>
           <CardInfo>{project.description}</CardInfo>
-          <div>
+          {/* <div>
             <TitleContent>Stack</TitleContent>
             <TagList>
               {project.tags.map((tag,i)=>(
                 <Tag key={i}>{tag}</Tag>
               ))}
             </TagList>
-          </div>
+          </div> */}
           <UtilityList>
             <ExternalLinks href={project.visit} target="_blank">visit</ExternalLinks>
           </UtilityList>
