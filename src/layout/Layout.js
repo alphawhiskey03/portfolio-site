@@ -9,7 +9,7 @@ export const Layout = ({children}) => {
   return (
     <Container>
       <Head>
-        <title>Vig | portfolio</title>
+        <title>Vignesh | web developer coimbatore</title>
     <meta name="title" content="Vignesh web dev"/>
     <meta name="description" content=" I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
 "/> 
