@@ -19,10 +19,10 @@ const Hero = (props) => {
     <>
   <Section row nopadding>
   <LeftSection>
-    <SectionHero  main center>
+    <SectionTitle  main center>
       Hello world, <br />
       This is Vignesh!
-    </SectionHero >
+    </SectionTitle >
     <SectionText>
     I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
     </SectionText>
