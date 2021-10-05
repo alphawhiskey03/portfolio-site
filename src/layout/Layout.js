@@ -18,6 +18,7 @@ export const Layout = ({children}) => {
     <meta name="geo.placename" content="Coimbatore" />
     <meta name="geo.position" content="11.057688;76.968131" />
     <meta name="ICBM" content="11.057688, 76.968131" />
+    <meta name="robots" content="index, follow"/>
 
       </Head>
      <Header/>
