@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router'
 import {Head} from "next/head";
-import { Section, SectionText, SectionTitle ,SectionDivider} from '../../styles/GlobalComponents';
+import { Section, SectionText, SectionTitle ,SectionDivider,SectionHero } from '../../styles/GlobalComponents';
 import Button from '../../styles/GlobalComponents/Button';
 import { LeftSection } from './HeroStyles';
 
@@ -19,10 +19,10 @@ const Hero = (props) => {
     <>
   <Section row nopadding>
   <LeftSection>
-    <SectionTitle main center>
+    <SectionHero  main center>
       Hello world, <br />
       This is Vignesh!
-    </SectionTitle>
+    </SectionHero >
     <SectionText>
     I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
     </SectionText>
