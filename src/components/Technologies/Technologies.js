@@ -12,6 +12,8 @@ import { List, ListContainer, ListItem, ListParagraph, ListTitle,ListIcons,IconC
 const Technologies = () =>  ( 
 
   <Section id="tech">
+      <SectionDivider colorAlt />
+
     <SectionTitle>Tech stack</SectionTitle>
     <SectionText>
       I've worked with a range of technologies in the web development world.
@@ -51,7 +53,6 @@ const Technologies = () =>  (
     
   
   
-    <SectionDivider colorAlt />
   </Section>
 );
 
