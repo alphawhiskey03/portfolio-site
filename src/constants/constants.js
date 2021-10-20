@@ -31,8 +31,8 @@ export const projects = [
     description: "E-commerce site for a clothing brand named swetharajuSr7.",
     image: '/images/sr7.png',
     tags: ['Javascript', 'Php', 'MySQL'],
-    source: 'http://www.swetharaju7.com/',
-    visit: 'http://www.swetharaju7.com/',
+    source: '',
+    visit: '',
     id: 3,
   },
 ];
