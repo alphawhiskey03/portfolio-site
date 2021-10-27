@@ -10,7 +10,7 @@ export const projects = [
   },
   {
     title: 'OneSoil',
-    description:"Worked on a part of OneSoil . A web platform for precision farming. handled the api integration, Used MapBox for terrestrial plots",
+    description:"Worked on a part of OneSoil . A web platform for precision farming. handled the api integration and  terrestrial map plots",
     image: '/images/onesoil.png',
     tags: ['MapBox', 'JavaScript'],
     source: 'https://onesoil.ai/en/',
@@ -28,7 +28,7 @@ export const projects = [
   },
   {
     title: 'SR7',
-    description: "E-commerce site for a clothing brand named swetharajuSr7.",
+    description: " An E-commerce site for a clothing brand named SR7.",
     image: '/images/sr7.png',
     tags: ['Javascript', 'Php', 'MySQL'],
     source: '',
