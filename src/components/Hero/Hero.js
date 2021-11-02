@@ -26,7 +26,7 @@ const Hero = (props) => {
     <SectionText>
     I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
     </SectionText>
-    <Button onClick={handleClick} id="heroBtn">Get in touch!</Button>
+    <Button onClick={handleClick} id="heroBtn">Get in touch!!</Button>
   </LeftSection>
 </Section>
 </>
