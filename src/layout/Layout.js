@@ -10,10 +10,10 @@ export const Layout = ({children}) => {
     <Container>
       <Head>
         <title>Vignesh | web developer coimbatore</title>
-    <meta name="title" content="Vignesh web dev"/>
+    <meta name="title" content="Vignesh | developer portfolio"/>
     <meta name="description" content=" I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
 "/> 
-    <meta name="keywords" content="web developer,react,express,node,mongodb,php,fullstack,developer"/>
+    <meta name="keywords" content="web,react,express,node,mongodb,php,fullstack,developer"/>
     <meta name="geo.region" content="IN-TN" />
     <meta name="geo.placename" content="Coimbatore" />
     <meta name="geo.position" content="11.057688;76.968131" />
