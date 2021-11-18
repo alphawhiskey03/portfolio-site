@@ -13,7 +13,7 @@ export const Layout = ({children}) => {
     <meta name="title" content="Vignesh | developer portfolio"/>
     <meta name="description" content=" I'm an aspiring and passionate developer, I've been super enthusiastic about learning web/cross-platform technologies, enduring my journey as a full stack web developer. 
 "/> 
-    <meta property="og:image" content="/images/vignesh-webdev.png" />
+    <meta property="og:image" content="/images/vignesh-developer.png" />
     <meta name="keywords" content="web,react,express,node,mongodb,php,fullstack,developer"/>
     <meta name="geo.region" content="IN-TN" />
     <meta name="geo.placename" content="Coimbatore" />
