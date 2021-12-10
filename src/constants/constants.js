@@ -1,7 +1,7 @@
 export const projects = [
   {
     title: 'Rotaract 3201',
-    description: "Got the privilege of working in the official website of rotaract 3201. it's a web portal for the maintenance of the organization and its events . Took care of the the back-end of the website , built it with three level admin architecture and automated the procedural aspects of the organization.",
+    description: "Got the privilege of working in the official website of rotaract 3201. it's a web portal for the maintenance of the organization and its events . Built it with three level admin architecture and automated the procedural aspects of the organization.",
       image: '/images/rotaract.png',
       tags: ['Php', 'MySQL', 'JavaScript'],
     source: 'https://www.rotaract3201.org/',
@@ -18,8 +18,8 @@ export const projects = [
     id: 1,
   },
   {
-    title: 'Scalabilty Engineers',
-    description: "Blog and career portal for scalability engineers",
+    title: 'Scalability Engineers',
+    description: "Blog and career portal for Scalability engineers",
       image: '/images/scalability.png',
       tags: ['JavaScript', 'Php','MySQL'],
     source: 'https://scalabilityengineers.com/',
@@ -28,7 +28,7 @@ export const projects = [
   },
   {
     title: 'SR7',
-    description: " An E-commerce site for a clothing brand named SR7.",
+    description: "E-commerce site for SR7.",
     image: '/images/sr7.png',
     tags: ['Javascript', 'Php', 'MySQL'],
     source: 'http://swetharaju7.com/',

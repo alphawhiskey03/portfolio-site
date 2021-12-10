@@ -1,10 +1,8 @@
 import React from 'react';
 import { DiFirebase, DiReact, DiBootstrap ,DiPhp ,DiMongodb,DiMysql,DiGit} from 'react-icons/di';
 import { IoLogoFirebase, IoLogoJavascript,IoLogoNodejs ,IoLogoPython} from "react-icons/io5";
-import { SiMaterialUi ,SiNextDotJs,SiJsonwebtokens} from "react-icons/si";
-import {SiRedux} from "react-icons/si";
-import Head from "next/head";
-
+import { SiMaterialui ,SiNextDotJs,SiJsonwebtokens,SiRedux, SiCypress} from "react-icons/si";
+import {GrDocker} from "react-icons/gr";
 
 import { Section, SectionDivider, SectionText, SectionTitle } from '../../styles/GlobalComponents';
 import { List, ListContainer, ListItem, ListParagraph, ListTitle,ListIcons,IconContent,MainContainer,IconText,Icon} from './TechnologiesStyles';
@@ -23,13 +21,12 @@ const Technologies = () =>  (
     <MainContainer>
     <ListIcons><IconContent><Icon><DiReact size='6rem'/></Icon><IconText>React.js</IconText></IconContent></ListIcons>
     <ListIcons><IconContent><Icon><DiBootstrap size='6rem'/></Icon><IconText>Bootstrap</IconText></IconContent></ListIcons>
-    <ListIcons><IconContent><Icon><SiMaterialUi size='6rem'/></Icon><IconText>Material UI</IconText> </IconContent></ListIcons>
+    <ListIcons><IconContent><Icon><SiMaterialui size='6rem'/></Icon><IconText>Material UI</IconText> </IconContent></ListIcons>
     <ListIcons><IconContent><Icon><SiRedux size='6rem'/></Icon><IconText>Redux</IconText> </IconContent></ListIcons>
     <ListIcons><IconContent><Icon><IoLogoJavascript size='6rem'/></Icon><IconText>JavaScript</IconText> </IconContent></ListIcons>
-    
-    
-    
+
     </MainContainer>
+
     <ListTitle>Back-end</ListTitle>
     <MainContainer>
     <ListIcons><IconContent><Icon><IoLogoNodejs size='6rem'/></Icon><IconText>Node.js</IconText> </IconContent></ListIcons>
@@ -40,11 +37,19 @@ const Technologies = () =>  (
 
     </MainContainer>
 
+
+      <ListTitle>Testing</ListTitle>
+      <MainContainer>
+        <ListIcons><IconContent><Icon><SiCypress size="5rem"/></Icon><IconText>Cypress</IconText></IconContent></ListIcons>
+    </MainContainer>
+
     <ListTitle>Other technologies</ListTitle>
     <MainContainer>
-    <ListIcons><IconContent><Icon><IoLogoFirebase size='6rem'/></Icon><IconText>FireBase</IconText> </IconContent></ListIcons>
-    <ListIcons><IconContent><Icon><DiGit size='6rem'/></Icon><IconText>Git</IconText> </IconContent></ListIcons>
-    <ListIcons><IconContent><Icon><SiJsonwebtokens size='6rem'/></Icon><IconText>JWT</IconText> </IconContent></ListIcons>
+    <ListIcons><IconContent><Icon><IoLogoFirebase size='7rem'/></Icon><IconText>FireBase</IconText> </IconContent></ListIcons>
+    <ListIcons><IconContent><Icon><DiGit size='7rem'/></Icon><IconText>Git</IconText> </IconContent></ListIcons>
+    <ListIcons><IconContent><Icon><SiJsonwebtokens size='7rem'/></Icon><IconText>JWT</IconText> </IconContent></ListIcons>
+    <ListIcons><IconContent><Icon><GrDocker size='7rem'/></Icon><IconText>Docker</IconText> </IconContent></ListIcons>
+    
     
 
 
