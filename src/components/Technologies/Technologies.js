@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  DiFirebase,
   DiReact,
   DiBootstrap,
   DiPhp,
@@ -14,7 +13,7 @@ import {
   IoLogoNodejs,
   IoLogoPython,
 } from "react-icons/io5";
-import { SiMaterialUi, SiNextDotJs, SiJsonwebtokens } from "react-icons/si";
+import { SiMaterialui, SiCypress, SiJsonwebtokens } from "react-icons/si";
 import { SiRedux } from "react-icons/si";
 import { GrGraphQl } from "react-icons/gr";
 
@@ -25,10 +24,6 @@ import {
   SectionTitle,
 } from "../../styles/GlobalComponents";
 import {
-  List,
-  ListContainer,
-  ListItem,
-  ListParagraph,
   ListTitle,
   ListIcons,
   IconContent,
@@ -67,9 +62,9 @@ const Technologies = () => (
       <ListIcons>
         <IconContent>
           <Icon>
-            <SiMaterialUi size="6rem" />
+            <SiMaterialui size="6rem" />
           </Icon>
-          <IconText>Material UI</IconText>{" "}
+          <IconText>MUI</IconText>{" "}
         </IconContent>
       </ListIcons>
       <ListIcons>
@@ -85,10 +80,11 @@ const Technologies = () => (
           <Icon>
             <IoLogoJavascript size="6rem" />
           </Icon>
-          <IconText>JavaScript</IconText>{" "}
+          <IconText>Javascript</IconText>{" "}
         </IconContent>
       </ListIcons>
     </MainContainer>
+
     <ListTitle>Back-end</ListTitle>
     <MainContainer>
       <ListIcons>
@@ -133,6 +129,18 @@ const Technologies = () => (
       </ListIcons>
     </MainContainer>
 
+    <ListTitle>Testing tools</ListTitle>
+    <MainContainer>
+      <ListIcons>
+        <IconContent>
+          <Icon>
+            <SiCypress size="6rem" />
+          </Icon>
+          <IconText>Cypress</IconText>
+        </IconContent>
+      </ListIcons>
+    </MainContainer>
+
     <ListTitle>Other technologies</ListTitle>
     <MainContainer>
       <ListIcons>
@@ -148,7 +156,7 @@ const Technologies = () => (
           <Icon>
             <IoLogoFirebase size="6rem" />
           </Icon>
-          <IconText>FireBase</IconText>{" "}
+          <IconText>Firebase</IconText>{" "}
         </IconContent>
       </ListIcons>
       <ListIcons>

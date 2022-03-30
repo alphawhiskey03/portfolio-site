@@ -26,6 +26,7 @@ export const projects = [
         link: "https://github.com/PHPMailer/PHPMailer",
       },
     ],
+
     visit: "https://www.rotaract3201.org/",
     id: 0,
   },
@@ -41,6 +42,7 @@ export const projects = [
         link: "https://www.javascript.com/",
       },
     ],
+
     visit: "https://onesoil.ai/en/",
     id: 1,
   },
@@ -62,6 +64,7 @@ export const projects = [
         link: "https://www.javascript.com/",
       },
     ],
+
     visit: "https://scalabilityengineers.com/",
     id: 2,
   },
@@ -177,7 +180,6 @@ export const MyProjects = [
     description:
       "In the process of learning next.js, i built my portfolio website along with styled components",
     image: "/images/portfolio.png",
-    source: "https://github.com/alphawhiskey03/portfolio-site",
     tags: [
       {
         name: "next.js",
@@ -187,6 +189,17 @@ export const MyProjects = [
         name: "styled components",
         link: "https://styled-components.com/",
       },
+      {
+        name: "email.js",
+        link: "https://www.emailjs.com/",
+      },
     ],
   },
 ];
+
+export const heroText =
+  " A passionate software developer, who has been super enthusiastic about learning and working with web/cross-platform technologies.";
+export const timelineText = `${heroText}  Currently
+working as a full stack developer . I have an experience of almost 2
+years, Worked on 5+ realtime projects. I specialize in building
+e-commerce and organistational management systems `;
