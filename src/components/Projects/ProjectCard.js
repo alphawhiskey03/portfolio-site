@@ -62,9 +62,11 @@ const ProjectCard = ({ project }) => {
               source
             </ExternalLinks>
           )}
-          <ExternalLinks href={project.visit} target="_blank">
-            visit
-          </ExternalLinks>
+          {project.visit && (
+            <ExternalLinks href={project.visit} target="_blank">
+              visit
+            </ExternalLinks>
+          )}
         </UtilityList>
       </BlogCard>
     </>

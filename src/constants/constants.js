@@ -177,6 +177,7 @@ export const MyProjects = [
   },
   {
     title: "My portfolio website",
+    source: "https://github.com/alphawhiskey03/portfolio-site",
     description:
       "In the process of learning next.js, i built my portfolio website along with styled components",
     image: "/images/portfolio.png",
