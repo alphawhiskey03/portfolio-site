@@ -139,7 +139,7 @@ export const MyProjects = [
   {
     title: "RICKED",
     description:
-      "An app mimicing a social media platform , The app lets user register an account and the user can post pictures, content,comment on posts ,like posts etc ... React context is used for centralizing application state. Apollo client is used as the grahql client in the app. it's user interface is completely designed with MUI5 . For the file storage firebase storage has been used, User authentication is managed with jsonwebtoken . The database used is MongoDB with mongoose as ODM (Object data model). The data is served with Apollo-server which is one of the commonly used GraphQL server.",
+      "An app mimicing a social media platform , The app lets user register an account and the user can post pictures, content,comment on posts ,like posts etc ... React context is used for centralizing application state. Apollo client is used as the grahql client in the app. it's user interface is completely designed with MUI5 . For the file storage firebase storage has been used, User authentication is managed with jsonwebtoken . The database used is MongoDB with mongoose as ODM (Object data model). The  server is a GraphQL server.",
     image: "/images/ricked.png",
     source: "https://github.com/alphawhiskey03/social-media-app",
     visit: "https://ricked.netlify.app/",
