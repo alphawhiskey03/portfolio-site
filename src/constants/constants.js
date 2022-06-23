@@ -139,7 +139,7 @@ export const MyProjects = [
   {
     title: "RICKED",
     description:
-      "An app mimicing a social media platform , The app lets user register an account and the user can post pictures, content,comment on posts ,like posts etc ... React context is used for centralizing application state. Apollo client is used as the grahql client in the app. it's user interface is completely designed with MUI5 . For the file storage firebase storage has been used, User authentication is managed with jsonwebtoken . The database used is MongoDB with mongoose as ODM (Object data model). The data is served with Apollo-server which is one of the commonly used GraphQL server.",
+      "A social media app , The app lets user register an account and the user can post pictures, content,comment on posts ,like posts etc ... React context is used for centralizing application state. Apollo client is used as the grahql client in the app. it's user interface is completely designed with MUI5 . For the file storage firebase storage has been used, User authentication is managed with jsonwebtoken . The database used is MongoDB with mongoose as ODM (Object data model). The data is served with Apollo-server which is one of the commonly used GraphQL server.",
     image: "/images/ricked.png",
     source: "https://github.com/alphawhiskey03/social-media-app",
     visit: "https://ricked.netlify.app/",
@@ -193,6 +193,39 @@ export const MyProjects = [
       {
         name: "email.js",
         link: "https://www.emailjs.com/",
+      },
+    ],
+  },
+  {
+    title: "Chat-app",
+    description:"Ever since I started development, I’ve always wanted to create a chat application. So, while learning GraphQL it was a good idea to build a chat app to get a good grip on GraphQL subscriptions as the chat app involves real time data transfer.The app allows user to react to messages.  I’ve built this app from scratch with React, Bootstrap, Node, Apollo, MongoDB and GraphQL. ",
+    image:  "/images/chat-app.png",
+    source: "https://github.com/alphawhiskey03/chat-app",
+    tags: [
+      {
+        name: "react",
+        link: "https://reactjs.org/",
+      },
+      {
+        name: "graphql",
+        link: "https://graphql.org/",
+      },
+      {
+        name: "apollo",
+        link: "https://www.apollographql.com/",
+      },
+      {
+        name: "Bootstrap",
+        link: "https://getbootstrap.com/",
+      },
+
+      {
+        name: "react context",
+        link: "https://reactjs.org/docs/context.html",
+      },
+      {
+        name: "jsonwebtokens",
+        link: "https://jwt.io/",
       },
     ],
   },
