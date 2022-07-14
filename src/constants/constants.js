@@ -232,8 +232,7 @@ export const MyProjects = [
 ];
 
 export const heroText =
-  " A passionate software developer, who has been super enthusiastic about learning and working with web/cross-platform technologies.";
-export const timelineText = `${heroText}  Currently
-working as a full stack developer . I have an experience of almost 2
+  "An aspiring blockchain developer getting into the web3 space. I've been super enthusiastic about learning and working with web and decentralized technologies. Currently learning technologies like Solidity, Hardhat, Next.js";
+export const timelineText = `${heroText}  . I have an experience of almost 2
 years, Worked on 5+ realtime projects. I specialize in building
 e-commerce and organistational management systems `;
