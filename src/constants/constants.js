@@ -105,8 +105,12 @@ export const TimeLineData = [
   },
   {
     year: 2021,
-    text: "Switched to MERN Stack. Landed on a MERN stack developer job at Sierra digital inc.",
+    text: "Switched to MERN Stack, learnt to build and work with both graphql and REST APIs",
   },
+  {
+    year:2022,
+    text:"Got into web3, Learning solidity, hardhat, Ethereum"
+  }
 ];
 
 export const MyProjects = [
