@@ -153,7 +153,7 @@ export const MyProjects = [
       "This a react application which let's user to browse details about cryptocurriencies, latest cryptocurrency news and details on exchanges. I've built this project to get a clear understanding of how redux and RTK Queries work. This project is built on top of more than 3 APIs which are provided by RapidApi. The UI is done with Ant Design and charts are plotted with Recharts",
     image: "/images/crypton.png",
     source: "https://github.com/alphawhiskey03/crypto-app",
-    visit: "https://crypton03.netlify.app",
+//     visit: "https://crypton03.netlify.app",
     tags: [
       {
         name: "react",
@@ -179,7 +179,7 @@ export const MyProjects = [
       "A social media app , The app lets user register an account and the user can post pictures, content,comment on posts ,like posts etc ... React context is used for centralizing application state. Apollo client is used as the grahql client in the app. it's user interface is completely designed with MUI5 . For the file storage firebase storage has been used, User authentication is managed with jsonwebtoken . The database used is MongoDB with mongoose as ODM and ive used Apollo-server in the backend.",
     image: "/images/ricked.png",
     source: "https://github.com/alphawhiskey03/social-media-app",
-    visit: "https://ricked.netlify.app/",
+//     visit: "https://ricked.netlify.app/",
     tags: [
       {
         name: "react",
