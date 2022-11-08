@@ -36,7 +36,7 @@ export const projects = [
       "The project which laid my foundation in javascript. i Worked on a part of OneSoil . A web platform for precision farming. handled the api integration and  terrestrial map plots.",
     image: "/images/onesoil.png",
     tags: [
-      { name: "mapbox", link: "https://www.mapbox.com/" },
+      {name: "mapbox", link: "https://www.mapbox.com/"},
       {
         name: "javascript",
         link: "https://www.javascript.com/",
@@ -97,8 +97,8 @@ export const projects = [
 ];
 
 export const TimeLineData = [
-  { year: 2018, text: "Started my journey" },
-  { year: 2019, text: "Learnt web development with python and php" },
+  {year: 2018, text: "Started my journey"},
+  {year: 2019, text: "Learnt web development with python and php"},
   {
     year: 2020,
     text: "Started working as a freelance developer with my first E-commerce",
@@ -108,16 +108,17 @@ export const TimeLineData = [
     text: "Switched to MERN Stack, learnt to build and work with both graphql and REST APIs",
   },
   {
-    year:2022,
-    text:"Got into web3, Learning solidity, hardhat, Ethereum"
-  }
+    year: 2022,
+    text: "Got into web3, Learning solidity, hardhat, Ethereum",
+  },
 ];
 
 export const MyProjects = [
   {
     title: "Chat-app",
-    description:"Ever since I started development, I’ve always wanted to create a chat application. So, while learning GraphQL it was a good idea to build a chat app to get a good grip on GraphQL subscriptions as the chat app involves real time data transfer.The app allows user to react to messages.  I’ve built this app from scratch with React, Bootstrap, Node, Apollo, MongoDB and GraphQL. ",
-    image:  "/images/chat-app.png",
+    description:
+      "Ever since I started development, I’ve always wanted to create a chat application. So, while learning GraphQL it was a good idea to build a chat app to get a good grip on GraphQL subscriptions as the chat app involves real time data transfer.The app allows user to react to messages.  I’ve built this app from scratch with React, Bootstrap, Node, Apollo, MongoDB and GraphQL. ",
+    image: "/images/chat-app.png",
     source: "https://github.com/alphawhiskey03/chat-app",
     tags: [
       {
@@ -233,11 +234,10 @@ export const MyProjects = [
       },
     ],
   },
-  
 ];
 
 export const heroText =
   "An aspiring blockchain developer getting into the web3 space. I've been super enthusiastic about learning and working with web and decentralized technologies. Currently learning technologies like Solidity, Hardhat, Next.js";
-export const timelineText = `${heroText}  . I have an experience of almost 2
+export const timelineText = `${heroText}  . I have an experience of almost 3
 years, Worked on 5+ realtime projects. I specialize in building
 e-commerce and organistational management systems `;
