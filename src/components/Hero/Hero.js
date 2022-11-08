@@ -1,14 +1,14 @@
 import React from "react";
-import { useRouter } from "next/router";
-import { Head } from "next/head";
+import {useRouter} from "next/router";
+import {Head} from "next/head";
 import {
   Section,
   SectionText,
   SectionTitle,
 } from "../../styles/GlobalComponents";
 import Button from "../../styles/GlobalComponents/Button";
-import { LeftSection } from "./HeroStyles";
-import { heroText } from "../../constants/constants";
+import {LeftSection} from "./HeroStyles";
+import {heroText} from "../../constants";
 const handleClick = () => {
   const router = useRouter();
   router.push("#contact");

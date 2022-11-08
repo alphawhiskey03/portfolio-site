@@ -13,14 +13,14 @@ import {
   SectionDivider,
   SectionTitle,
 } from "../../styles/GlobalComponents";
-import { projects, MyProjects } from "../../constants/constants";
-import { FiChevronRight } from "react-icons/fi";
+import {projects, MyProjects} from "../../constants";
+import {FiChevronRight} from "react-icons/fi";
 
-import { FaMedapps, FaLaptopCode } from "react-icons/fa";
+import {FaMedapps, FaLaptopCode} from "react-icons/fa";
 import ProjectCard from "./ProjectCard";
 import Link from "next/link";
 
-const ProjectComponent = ({ simplified }) => {
+const ProjectComponent = ({simplified}) => {
   if (simplified)
     return (
       <Section nopadding>
@@ -29,7 +29,7 @@ const ProjectComponent = ({ simplified }) => {
         <Link href="/projects">
           <ProjectTypeContainer>
             <ProjectTypeHeader>
-              <FaMedapps style={{ marginRight: 10 }} />
+              <FaMedapps style={{marginRight: 10}} />
               My Projects
             </ProjectTypeHeader>
             <ChevronSpan>
@@ -40,7 +40,7 @@ const ProjectComponent = ({ simplified }) => {
         <Link href="/projects#freelanceprojects">
           <ProjectTypeContainer>
             <ProjectTypeHeader>
-              <FaLaptopCode style={{ marginRight: 10 }} />
+              <FaLaptopCode style={{marginRight: 10}} />
               Freelance Projects
             </ProjectTypeHeader>
             <ChevronSpan>
