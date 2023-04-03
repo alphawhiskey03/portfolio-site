@@ -69,6 +69,7 @@ const Touch = () => {
       );
     }
     setLoading(false);
+    e.target.reset();
   };
   return (
     <Section id="contact">
