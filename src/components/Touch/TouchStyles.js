@@ -48,7 +48,7 @@ export const FormTextArea = styled.textarea`
   font-size: 2rem;
   width: 100%;
   height: 10rem;
-  border: ${(props) => `}1px solid ${props.theme.colors.secondary}`};
+  border: ${(props) => `1px solid ${props.theme.colors.secondary}`};
   border-radius: 0.5rem;
   border-width: 1.5px;
   outline: none;
