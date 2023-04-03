@@ -1,20 +1,10 @@
 import React from "react";
-import {useRouter} from "next/router";
-import {Head} from "next/head";
-import {
-  Section,
-  SectionText,
-  SectionTitle,
-} from "../../styles/GlobalComponents";
-import Button from "../../styles/GlobalComponents/Button";
-import {LeftSection} from "./HeroStyles";
-import {heroText} from "../../constants";
-const handleClick = () => {
-  const router = useRouter();
-  router.push("#contact");
-};
+import { useRouter } from "next/router";
+import { Section, SectionHero, SectionText } from "../common/styles";
+import Button from "../common/Button";
+import { LeftSection } from "./HeroStyles";
 
-const Hero = (props) => {
+const Hero = ({ content }) => {
   const router = useRouter();
   const handleClick = () => {
     router.push("#contact");
@@ -23,11 +13,11 @@ const Hero = (props) => {
     <>
       <Section row nopadding>
         <LeftSection>
-          <SectionTitle main center>
+          <SectionHero main center>
             Hello world, <br />
             This is Vignesh!
-          </SectionTitle>
-          <SectionText>{heroText}</SectionText>
+          </SectionHero>
+          <SectionText>{content}</SectionText>
           <Button onClick={handleClick} id="heroBtn">
             Get in touch!
           </Button>

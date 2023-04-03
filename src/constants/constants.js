@@ -36,7 +36,7 @@ export const projects = [
       "The project which laid my foundation in javascript. i Worked on a part of OneSoil . A web platform for precision farming. handled the api integration and  terrestrial map plots.",
     image: "/images/onesoil.png",
     tags: [
-      {name: "mapbox", link: "https://www.mapbox.com/"},
+      { name: "mapbox", link: "https://www.mapbox.com/" },
       {
         name: "javascript",
         link: "https://www.javascript.com/",
@@ -97,8 +97,8 @@ export const projects = [
 ];
 
 export const TimeLineData = [
-  {year: 2018, text: "Started my journey"},
-  {year: 2019, text: "Learnt web development with python and php"},
+  { year: 2018, text: "Started my journey" },
+  { year: 2019, text: "Learnt web development with python and php" },
   {
     year: 2020,
     text: "Started working as a freelance developer with my first E-commerce",

@@ -112,6 +112,7 @@ export const TagList = styled.ul`
   padding: 2rem;
   flex-wrap: wrap;
 `;
+
 export const Tag = styled.li`
   color: #d8bfbf;
   font-size: 1.5rem;
@@ -135,18 +136,23 @@ export const ProjectTypeContainer = styled.div`
     padding: 20px;
   }
 `;
+
 export const ChevronSpan = styled.span`
   flex-grow: 1;
   font-weight: 800;
   font-size: 30px;
+  color: ${(props) => `${props.theme.colors.primary1};`};
   @media ${(props) => props.theme.breakpoints.sm} {
     font-size: 20px;
   }
 `;
+
 export const ProjectTypeHeader = styled.span`
   font-weight: 800;
   flex-basis: 300px;
   font-size: 30px;
+  color: ${(props) => `${props.theme.colors.primary1};`};
+
   background: linear-gradient(
     121.57deg,
     #ffffff 18.77%,
@@ -159,32 +165,38 @@ export const ProjectTypeHeader = styled.span`
     font-size: 15px;
   }
 `;
+
 export const ReadMoreBtn = styled.button`
   background: none;
   border: none;
-  color: red;
+  color: ${(props) => props.theme.colors.secondary};
   cursor: pointer;
   margin-left: 50px;
   @media ${(props) => props.theme.breakpoints.sm} {
     margin-left: 10px;
   }
 `;
+
 export const TagLink = styled.a`
   text-decoration: none;
   color: inherit;
 `;
+
 export const ProjectLinkContainer = styled.div`
   padding: 30px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 `;
+
 export const ProjectTypeLink = styled.h5`
   padding: 10px;
-  border: 1px solid red;
+  border: 1px solid ${(props) => props.theme.colors.secondary};
   border-radius: 10px;
   margin: 5px;
   cursor: pointer;
+  color: ${(props) => `${props.theme.colors.primary1};`};
+
   &:hover {
     border: 1px solid silver;
   }

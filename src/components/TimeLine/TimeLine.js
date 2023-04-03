@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import {
   CarouselButton,
@@ -16,17 +16,27 @@ import {
   SectionDivider,
   SectionText,
   SectionTitle,
-} from "../../styles/GlobalComponents";
-import {TimeLineData, timelineText} from "../../constants";
+} from "../common/styles";
+import SocialLinks from "../common/SocialLinks";
+import { TimeLineData, timelineText } from "../../constants";
+import { client } from "../../sanity";
+import { GET_TIMELINE } from "../../constants";
 
 const TOTAL_CAROUSEL_COUNT = TimeLineData.length;
 
-const Timeline = () => {
+const Timeline = ({ aboutMe, socialMedia }) => {
   const [activeItem, setActiveItem] = useState(0);
   const carouselRef = useRef();
+  const [timeline, setTimeline] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const timelinedata = await client.fetch(GET_TIMELINE);
+      setTimeline(timelinedata);
+    })();
+  }, []);
 
   const scroll = (node, left) => {
-    return node.scrollTo({left, behavior: "smooth"});
+    return node.scrollTo({ left, behavior: "smooth" });
   };
 
   const handleClick = (e, i) => {
@@ -66,10 +76,11 @@ const Timeline = () => {
   return (
     <Section id="about">
       <SectionTitle>About Me</SectionTitle>
-      <SectionText>{timelineText}</SectionText>
+      <SectionText>{aboutMe}</SectionText>
+      <SocialLinks links={socialMedia} />
       <CarouselContainer ref={carouselRef} onScroll={handleScroll}>
         <>
-          {TimeLineData.map((item, index) => (
+          {timeline.map((item, index) => (
             <CarouselMobileScrollNode
               key={index}
               final={index === TOTAL_CAROUSEL_COUNT - 1}
@@ -115,14 +126,14 @@ const Timeline = () => {
                     </defs>
                   </CarouselItemImg>
                 </CarouselItemTitle>
-                <CarouselItemText>{item.text}</CarouselItemText>
+                <CarouselItemText>{item.description}</CarouselItemText>
               </CarouselItem>
             </CarouselMobileScrollNode>
           ))}
         </>
       </CarouselContainer>
       <CarouselButtons>
-        {TimeLineData.map((item, index) => {
+        {timeline.map((item, index) => {
           return (
             <CarouselButton
               key={index}

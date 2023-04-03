@@ -1,9 +1,10 @@
+import { useState } from "react";
 import {
   Section,
   SectionDivider,
   SectionText,
   SectionTitle,
-} from "../../styles/GlobalComponents";
+} from "../common/styles/index";
 import {
   ListTitle,
   ListIcons,
@@ -14,46 +15,70 @@ import {
   InfoText,
   TechGrid,
 } from "./TechnologiesStyles";
-import {frontend, backend, web3, testing, otherTech} from "../../constants";
+import { useEffect } from "react";
+import { client } from "../../sanity";
+import { GET_TECHNOLOGIES } from "../../constants";
+import IconComponent from "../common/IconComponents";
+import { categoriseData } from "../../utils";
+import { capitalize } from "lodash";
 
-const TechSection = ({technologies, title}) => {
+const TechSection = ({ technologies, title }) => {
   return (
     <div>
-      <ListTitle>{title}</ListTitle>
+      <ListTitle>{capitalize(title)}</ListTitle>
       <MainContainer>
-        {technologies.map(({name, icon: TechIcon, size}) => (
-          <ListIcons>
-            <IconContent>
-              <Icon>
-                <TechIcon size={size} />
-              </Icon>
-              <IconText>{name}</IconText>
-            </IconContent>
-          </ListIcons>
+        {technologies.map(({ title, icon, featured }) => (
+          <>
+            {featured && (
+              <ListIcons>
+                <IconContent>
+                  <Icon>
+                    <IconComponent
+                      packageName={icon.packageName}
+                      icon={icon.name}
+                      iconProps={{ size: "6rem" }}
+                    />
+                  </Icon>
+                  <IconText>{title}</IconText>
+                </IconContent>
+              </ListIcons>
+            )}
+          </>
         ))}
       </MainContainer>
     </div>
   );
 };
 
-const Technologies = () => (
-  <Section id="tech">
-    <SectionDivider colorAlt />
+const Technologies = ({ description }) => {
+  const [technologies, setTechnologies] = useState([]);
 
-    <SectionTitle>Tech stack</SectionTitle>
-    <SectionText style={{paddingBottom: 3}}>
-      I've worked with a range of technologies in the web development world.
-      From Back-end To Front-end.
-    </SectionText>
-    <InfoText>(Hover over / click the icons to see the names)</InfoText>
-    <TechGrid>
-      <TechSection technologies={frontend} title="Frontend" />
-      <TechSection technologies={backend} title="Backend" />
-      <TechSection technologies={web3} title="Blockchain" />
-      <TechSection technologies={testing} title="Testing" />
-      <TechSection technologies={otherTech} title="Other technologies" />
-    </TechGrid>
-  </Section>
-);
+  useEffect(() => {
+    (async () => {
+      try {
+        const result = await client.fetch(GET_TECHNOLOGIES);
+        setTechnologies(categoriseData(result, "category"));
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+  return (
+    <Section id="tech">
+      <SectionDivider colorAlt />
+      <SectionTitle>Tech stack</SectionTitle>
+      <SectionText style={{ paddingBottom: 3 }}>{description}</SectionText>
+      <InfoText>(Hover over / click the icons to see the names)</InfoText>
+      <TechGrid>
+        {technologies.map((technology) => (
+          <TechSection
+            technologies={technology.items}
+            title={technology.category}
+          />
+        ))}
+      </TechGrid>
+    </Section>
+  );
+};
 
 export default Technologies;

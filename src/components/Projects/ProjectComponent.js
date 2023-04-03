@@ -8,19 +8,46 @@ import {
   ChevronSpan,
   ProjectLinkContainer,
 } from "./ProjectsStyles";
-import {
-  Section,
-  SectionDivider,
-  SectionTitle,
-} from "../../styles/GlobalComponents";
-import {projects, MyProjects} from "../../constants";
-import {FiChevronRight} from "react-icons/fi";
+import { Section, SectionDivider, SectionTitle } from "../common/styles/index";
+import { FiChevronRight } from "react-icons/fi";
 
-import {FaMedapps, FaLaptopCode} from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaMedapps, FaLaptopCode } from "react-icons/fa";
 import ProjectCard from "./ProjectCard";
 import Link from "next/link";
+import { client } from "../../sanity";
+import { categoriseData, formatTitle } from "../../utils/index";
+import { GET_PROJECTS } from "../../constants";
 
-const ProjectComponent = ({simplified}) => {
+const ProjectSection = ({ projects }) => {
+  const { items, category } = projects;
+  if (category == "org-projects") {
+    return null;
+  }
+  return (
+    <Section nopadding id={category}>
+      <br />
+      <SectionTitle>{formatTitle(category)}</SectionTitle>
+      <GridContainer>
+        {items.map((project) => (
+          <ProjectCard project={project} key={project.name} />
+        ))}
+      </GridContainer>
+      <br />
+      <SectionDivider colorAlt />
+    </Section>
+  );
+};
+
+const ProjectComponent = ({ simplified }) => {
+  const [allProjects, setAllProjects] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const result = await client.fetch(GET_PROJECTS);
+      setAllProjects(categoriseData(result, "project_type"));
+    })();
+  }, []);
+
   if (simplified)
     return (
       <Section nopadding>
@@ -29,7 +56,7 @@ const ProjectComponent = ({simplified}) => {
         <Link href="/projects">
           <ProjectTypeContainer>
             <ProjectTypeHeader>
-              <FaMedapps style={{marginRight: 10}} />
+              <FaMedapps style={{ marginRight: 10 }} />
               My Projects
             </ProjectTypeHeader>
             <ChevronSpan>
@@ -40,7 +67,7 @@ const ProjectComponent = ({simplified}) => {
         <Link href="/projects#freelanceprojects">
           <ProjectTypeContainer>
             <ProjectTypeHeader>
-              <FaLaptopCode style={{marginRight: 10}} />
+              <FaLaptopCode style={{ marginRight: 10 }} />
               Freelance Projects
             </ProjectTypeHeader>
             <ChevronSpan>
@@ -60,28 +87,17 @@ const ProjectComponent = ({simplified}) => {
           <ProjectTypeLink>Freelance Projects</ProjectTypeLink>
         </Link>
       </ProjectLinkContainer>
-      <Section nopadding id="myprojects">
+
+      {allProjects.map((projects, i) => (
+        <ProjectSection key={i} projects={projects} />
+      ))}
+      {/* <Section nopadding id="myprojects">
         <br />
         <SectionTitle>My Projects</SectionTitle>
-        <GridContainer>
-          {MyProjects.map((project) => (
-            <ProjectCard project={project} key={project.title} />
-          ))}
-        </GridContainer>
+        <ProjectSection projects={MyProjects.ite} />
         <br />
         <SectionDivider colorAlt />
-      </Section>
-      <Section nopadding id="freelanceprojects">
-        <br />
-        <SectionTitle>Freelance projects</SectionTitle>
-        <GridContainer>
-          {projects.map((project) => (
-            <ProjectCard project={project} key={project.name} />
-          ))}
-        </GridContainer>
-        <br />
-        <SectionDivider colorAlt />
-      </Section>
+      </Section> */}
     </>
   );
 };

@@ -1,39 +1,38 @@
-import React from 'react';
-import { AiFillGithub, AiFillInstagram, AiFillLinkedin } from 'react-icons/ai';
+import React from "react";
 
-import { SocialIcons } from '../Header/HeaderStyles';
-import { CompanyContainer, FooterWrapper, LinkColumn, LinkItem, LinkList, LinkTitle, Slogan, SocialContainer, SocialIconsContainer } from './FooterStyles';
+import SocialLinks from "../common/SocialLinks";
 
-const Footer = () => {
+import {
+  CompanyContainer,
+  FooterWrapper,
+  LinkColumn,
+  LinkItem,
+  LinkList,
+  LinkTitle,
+  Slogan,
+  SocialIconsContainer,
+} from "./FooterStyles";
+
+const Footer = ({ mobile, email, city, state, socialMedia }) => {
   return (
     <FooterWrapper>
       <LinkList>
         <LinkColumn>
           <LinkTitle>Call</LinkTitle>
-          <LinkItem href="tel:+91-6381946670">(+91) 6381-946-670</LinkItem>
+          <LinkItem href={`tel:+91-${mobile}`}>(+91) {mobile}</LinkItem>
         </LinkColumn>
         <LinkColumn>
           <LinkTitle>Email</LinkTitle>
-          <LinkItem href="mailto:alphavignesh98@gmail.com">
-            alphavignesh98@gmail.com
-          </LinkItem>
+          <LinkItem href={`mailto:${email}`}>alphavignesh98@gmail.com</LinkItem>
         </LinkColumn>
       </LinkList>
       <SocialIconsContainer>
         <CompanyContainer>
-          <Slogan>All the way from Coimbatore,TN</Slogan>
+          <Slogan>
+            All the way from {city}, {state}
+          </Slogan>
         </CompanyContainer>
-        <SocialContainer>
-          <SocialIcons href="https://github.com/alphawhiskey03">
-            <AiFillGithub size="3rem" />
-          </SocialIcons>
-          <SocialIcons href="https://www.linkedin.com/in/vignesh-s-802812183/">
-            <AiFillLinkedin size="3rem" />
-          </SocialIcons>
-          <SocialIcons href="https://www.instagram.com/vigneshh._/?utm_medium=copy_link">
-            <AiFillInstagram size="3rem" />
-          </SocialIcons>
-        </SocialContainer>
+        <SocialLinks links={socialMedia} onlyFeatured />
       </SocialIconsContainer>
     </FooterWrapper>
   );

@@ -1,18 +1,10 @@
 import Link from "next/link";
 import React from "react";
-import { AiFillGithub, AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 
-import {
-  Container,
-  Div1,
-  Div2,
-  Div3,
-  NavLink,
-  SocialIcons,
-  Span,
-} from "./HeaderStyles";
-
-const Header = () => (
+import { Container, NavLink, SocialIcons, Span } from "./HeaderStyles";
+import { Div1, Div2, Div3 } from "../common/styles";
+import SocialLinks from "../common/SocialLinks";
+const Header = ({ socialMedia }) => (
   <Container>
     <Div1>
       <Link href="/">
@@ -37,15 +29,7 @@ const Header = () => (
       </li>
     </Div2>
     <Div3>
-      <SocialIcons href="https://github.com/alphawhiskey03">
-        <AiFillGithub size="3rem" />
-      </SocialIcons>
-      <SocialIcons href="https://www.linkedin.com/in/vignesh-s-802812183/">
-        <AiFillLinkedin size="3rem" />
-      </SocialIcons>
-      <SocialIcons href="https://www.instagram.com/vigneshh._/?utm_medium=copy_link">
-        <AiFillInstagram size="3rem" />
-      </SocialIcons>
+      <SocialLinks onlyFeatured={true} links={socialMedia} />
     </Div3>
   </Container>
 );

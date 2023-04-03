@@ -5,7 +5,6 @@ import {
   ExternalLinks,
   HeaderThree,
   Hr,
-  Tag,
   TagList,
   TitleContent,
   UtilityList,
@@ -13,7 +12,9 @@ import {
   ReadMoreBtn,
   TagLink,
 } from "./ProjectsStyles";
-import { SectionDivider } from "../../styles/GlobalComponents";
+import { Tag } from "../common/styles";
+import { SectionDivider } from "../common/styles/";
+import { urlFor } from "../../sanity";
 const ProjectCard = ({ project }) => {
   const [btnToggle, setBtnToggle] = useState(false);
   const [txtLength, setTxtLength] = useState(100);
@@ -22,54 +23,56 @@ const ProjectCard = ({ project }) => {
   }, [btnToggle]);
   const descriptionLength = project.description.length > 100;
   return (
-    <>
-      <BlogCard key={project.id}>
-        <Img src={project.image} />
-        <TitleContent>
-          <HeaderThree title>{project.title}</HeaderThree>
-          <Hr />
-        </TitleContent>
-        <CardInfo>
-          {project.description
-            .slice(0, txtLength)
-            .concat(descriptionLength && !btnToggle ? "..." : "")}
-        </CardInfo>
-        <div style={{ textAlign: "left" }}>
-          {descriptionLength && (
-            <ReadMoreBtn onClick={() => setBtnToggle(!btnToggle)}>
-              {btnToggle ? "Read less" : "Read more"}
-            </ReadMoreBtn>
-          )}
-        </div>
-        <div>
-          <SectionDivider
-            colorAlt
-            style={{ marginTop: 10, marginBottom: 10, height: 2 }}
-          />
+    <BlogCard>
+      <Img src={urlFor(project.thumbnail)} />
+      <TitleContent>
+        <HeaderThree title>{project.title}</HeaderThree>
+        <Hr />
+      </TitleContent>
+      <CardInfo>
+        {project.description
+          .slice(0, txtLength)
+          .concat(descriptionLength && !btnToggle ? "..." : "")}
+      </CardInfo>
+      <div style={{ textAlign: "left" }}>
+        {descriptionLength && (
+          <ReadMoreBtn onClick={() => setBtnToggle(!btnToggle)}>
+            {btnToggle ? "Read less" : "Read more"}
+          </ReadMoreBtn>
+        )}
+      </div>
+      <div>
+        <SectionDivider
+          colorAlt
+          style={{ marginTop: 10, marginBottom: 10, height: 2 }}
+        />
 
-          <TitleContent>Technologies</TitleContent>
-          <TagList>
-            {project.tags.map((tag) => (
-              <TagLink href={tag.link} target="_blank" key={tag.name}>
-                <Tag>{tag.name}</Tag>
-              </TagLink>
-            ))}
-          </TagList>
-        </div>
-        <UtilityList>
-          {project.source && (
-            <ExternalLinks href={project.source} target="_blank">
-              source
-            </ExternalLinks>
-          )}
-          {project.visit && (
-            <ExternalLinks href={project.visit} target="_blank">
-              visit
-            </ExternalLinks>
-          )}
-        </UtilityList>
-      </BlogCard>
-    </>
+        <TitleContent>Technologies</TitleContent>
+        <TagList>
+          {project.technologies.map((technology) => (
+            <TagLink
+              href={technology.link}
+              target="_blank"
+              key={technology.title}
+            >
+              <Tag>{technology.title}</Tag>
+            </TagLink>
+          ))}
+        </TagList>
+      </div>
+      <UtilityList>
+        {project.source && (
+          <ExternalLinks href={project.source} target="_blank">
+            source
+          </ExternalLinks>
+        )}
+        {project.link && (
+          <ExternalLinks href={project.link} target="_blank">
+            visit
+          </ExternalLinks>
+        )}
+      </UtilityList>
+    </BlogCard>
   );
 };
 

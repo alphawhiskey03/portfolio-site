@@ -20,37 +20,8 @@ export const Container = styled.div`
 
 export const Span = styled.span`
   font-size: 2rem;
-  color: red;
+  color: ${(props) => props.theme.colors.secondary};
   margin-bottom: 20px;
-`;
-
-export const Div1 = styled.div`
-  grid-area: 1 / 1 / 2 / 2;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  @media ${(props) => props.theme.breakpoints.sm} {
-    grid-area: 1 / 1 / 2 / 3;
-  }
-`;
-export const Div2 = styled.div`
-  grid-area: 1 / 2 / 2 / 4;
-  display: flex;
-  justify-content: space-around;
-  @media ${(props) => props.theme.breakpoints.sm} {
-    grid-area: 2 / 2 / 3 / 5;
-    display: none;
-  }
-`;
-export const Div3 = styled.div`
-  grid-area: 1 / 5 / 2 / 6;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  @media ${(props) => props.theme.breakpoints.sm} {
-    align-items: center;
-    grid-area: 1 / 4 / 2 / 6;
-  }
 `;
 
 // Navigation Links
@@ -60,7 +31,7 @@ export const NavLink = styled.div`
   color: rgba(255, 255, 255, 0.75);
   transition: 0.4s ease;
   &:hover {
-    color: red;
+    color: ${(props) => props.theme.colors.secondary};
     opacity: 1;
     cursor: pointer;
   }
@@ -123,7 +94,7 @@ export const SocialIcons = styled.a`
   border-radius: 50px;
   padding: 8px;
   &:hover {
-    color: red;
+    color: ${(props) => props.theme.colors.secondary};
     background-color: #212d45;
     transform: scale(1.2);
     cursor: pointer;

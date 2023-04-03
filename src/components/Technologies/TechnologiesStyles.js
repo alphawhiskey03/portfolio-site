@@ -146,7 +146,7 @@ export const Icon = styled.div`
   transition: all 0.5s ease;
   cursor: pointer;
   &:hover {
-    color: red;
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 export const IconText = styled.span`
@@ -172,7 +172,7 @@ export const MainContainer = styled.div`
 `;
 
 export const InfoText = styled.p`
-  color: red;
+  color: ${(props) => props.theme.colors.secondary};
   font-size: 14px;
   margin-bottom: 10px;
 `;
