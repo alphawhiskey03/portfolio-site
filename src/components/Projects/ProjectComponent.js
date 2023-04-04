@@ -80,10 +80,10 @@ const ProjectComponent = ({ simplified }) => {
   return (
     <>
       <ProjectLinkContainer>
-        <Link href="/projects#myprojects">
+        <Link href="/projects#my-project">
           <ProjectTypeLink>My Projects</ProjectTypeLink>
         </Link>
-        <Link href="/projects#freelanceprojects">
+        <Link href="/projects#freelance-project">
           <ProjectTypeLink>Freelance Projects</ProjectTypeLink>
         </Link>
       </ProjectLinkContainer>
