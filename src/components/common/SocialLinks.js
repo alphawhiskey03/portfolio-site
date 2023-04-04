@@ -14,9 +14,9 @@ const SocialLinks = ({ links, onlyFeatured }) => {
     <StyledDiv1>
       {links.map(({ link, icon, main, title }) => {
         return (
-          <div key={title}>
+          <>
             {(!!!onlyFeatured || main) && (
-              <StyledSocialIcons href={link}>
+              <StyledSocialIcons key={title} href={link}>
                 <IconComponent
                   packageName={icon.packageName}
                   icon={icon.name}
@@ -24,7 +24,7 @@ const SocialLinks = ({ links, onlyFeatured }) => {
                 />
               </StyledSocialIcons>
             )}
-          </div>
+          </>
         );
       })}
     </StyledDiv1>
