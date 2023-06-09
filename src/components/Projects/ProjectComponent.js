@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { FiChevronRight } from "react-icons/fi";
+import { FaMedapps, FaLaptopCode } from "react-icons/fa";
 
 import {
   GridContainer,
@@ -9,12 +13,8 @@ import {
   ProjectLinkContainer,
 } from "./ProjectsStyles";
 import { Section, SectionDivider, SectionTitle } from "../common/styles/index";
-import { FiChevronRight } from "react-icons/fi";
 
-import { useEffect, useState } from "react";
-import { FaMedapps, FaLaptopCode } from "react-icons/fa";
 import ProjectCard from "./ProjectCard";
-import Link from "next/link";
 import { client } from "../../sanity";
 import { categoriseData, formatTitle } from "../../utils/index";
 import { GET_PROJECTS } from "../../constants";
@@ -41,6 +41,18 @@ const ProjectSection = ({ projects }) => {
 
 const ProjectComponent = ({ simplified }) => {
   const [allProjects, setAllProjects] = useState([]);
+  const router = useRouter();
+  useEffect(() => {
+    const { asPath } = router;
+    const id = asPath.split("#")[1];
+    if (id) {
+      console.log("hi");
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 400);
+    }
+  }, []);
   useEffect(() => {
     (async () => {
       const result = await client.fetch(GET_PROJECTS);
@@ -53,7 +65,7 @@ const ProjectComponent = ({ simplified }) => {
       <Section nopadding>
         <SectionDivider colorAlt />
         <SectionTitle>Projects</SectionTitle>
-        <Link href="/projects">
+        <Link href="/projects#my-project">
           <ProjectTypeContainer>
             <ProjectTypeHeader>
               <FaMedapps style={{ marginRight: 10 }} />
@@ -64,7 +76,7 @@ const ProjectComponent = ({ simplified }) => {
             </ChevronSpan>
           </ProjectTypeContainer>
         </Link>
-        <Link href="/projects#freelanceprojects">
+        <Link href="/projects#freelance-project">
           <ProjectTypeContainer>
             <ProjectTypeHeader>
               <FaLaptopCode style={{ marginRight: 10 }} />
