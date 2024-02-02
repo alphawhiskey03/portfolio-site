@@ -71,7 +71,7 @@ const Experiences = () => {
                 </StyledTagList>
               </>
             )}
-            {experience.projects.length > 0 && (
+            {experience.projects?.length > 0 && (
               <>
                 <SubHeadings>Projects</SubHeadings>
                 <ProjectSection>
