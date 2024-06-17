@@ -18,6 +18,7 @@ import {
 import { Section, SectionDivider, SectionTitle } from "../common/styles";
 import { Tag, TagList, TooltipWrapper } from "../common/styles";
 import IconComponent from "../common/IconComponents";
+import { getFormattedDateAndExperience } from "../../utils";
 
 const StyledTagList = styled(TagList)`
   justify-content: start;
@@ -43,51 +44,60 @@ const Experiences = () => {
   return (
     <Section id="experience">
       <SectionTitle>Experiences</SectionTitle>
-      {experiences.map((experience) => (
-        <Item key={experience.org_name}>
-          <div>
-            <OrgLogo src={urlFor(experience.logo)} />
-          </div>
-          <div>
-            <Role>{experience.role}</Role>
-            <Title>{experience.org_name}</Title>
-            <ExperienceTime>
-              {experience.start_date} - {experience.end_date}
-            </ExperienceTime>
-            <Description>{experience.description}</Description>
-            {experience.technologies.length > 0 && (
-              <>
-                <SubHeadings>Technologies</SubHeadings>
-                <StyledTagList>
-                  {experience.technologies.map((technology) => (
-                    <StyledTag key={technology.title}>
-                      <IconComponent
-                        packageName={technology.icon.packageName}
-                        icon={technology.icon.name}
-                      />
-                      {technology.title}
-                    </StyledTag>
-                  ))}
-                </StyledTagList>
-              </>
-            )}
-            {experience.projects?.length > 0 && (
-              <>
-                <SubHeadings>Projects</SubHeadings>
-                <ProjectSection>
-                  {experience.projects.map((project) => (
-                    <TooltipWrapper key={project.title} text={project.title}>
-                      <Link href={project.link}>
-                        <ProjectLogo src={urlFor(project.thumbnail)} />
-                      </Link>
-                    </TooltipWrapper>
-                  ))}
-                </ProjectSection>
-              </>
-            )}
-          </div>
-        </Item>
-      ))}
+      {experiences.map((experience) => {
+        const { formattedDate, duration } = getFormattedDateAndExperience(
+          experience.start_date,
+          experience.end_date
+        );
+        return (
+          <Item key={experience.org_name}>
+            <Link href={experience.org_link}>
+              <div>
+                <OrgLogo src={urlFor(experience.logo)} />
+              </div>
+            </Link>
+            <div>
+              <Role>{experience.role}</Role>
+              <Title>{experience.org_name}</Title>
+              <ExperienceTime>
+                {formattedDate} • <span className="duration">{duration} </span>
+              </ExperienceTime>
+
+              <Description>{experience.description}</Description>
+              {experience.technologies.length > 0 && (
+                <>
+                  <SubHeadings>Technologies</SubHeadings>
+                  <StyledTagList>
+                    {experience.technologies.map((technology) => (
+                      <StyledTag key={technology.title}>
+                        <IconComponent
+                          packageName={technology.icon.packageName}
+                          icon={technology.icon.name}
+                        />
+                        {technology.title}
+                      </StyledTag>
+                    ))}
+                  </StyledTagList>
+                </>
+              )}
+              {experience.projects?.length > 0 && (
+                <>
+                  <SubHeadings>Projects</SubHeadings>
+                  <ProjectSection>
+                    {experience.projects.map((project) => (
+                      <TooltipWrapper key={project.title} text={project.title}>
+                        <Link href={project.link}>
+                          <ProjectLogo src={urlFor(project.thumbnail)} />
+                        </Link>
+                      </TooltipWrapper>
+                    ))}
+                  </ProjectSection>
+                </>
+              )}
+            </div>
+          </Item>
+        );
+      })}
       <SectionDivider colorAlt />
     </Section>
   );

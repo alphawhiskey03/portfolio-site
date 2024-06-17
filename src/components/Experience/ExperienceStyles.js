@@ -55,6 +55,9 @@ export const ExperienceTime = styled.p`
   font-size: 12px;
   margin-bottom: 10px;
   color: ${(props) => props.theme.colors.accent1};
+  .duration {
+    color: ${(props) => props.theme.colors.primary1};
+  }
 `;
 
 export const Role = styled.p`
