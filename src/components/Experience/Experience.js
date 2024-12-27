@@ -82,7 +82,7 @@ const Experiences = () => {
               )}
               {experience.projects?.length > 0 && (
                 <>
-                  <SubHeadings>Projects</SubHeadings>
+                  <SubHeadings>Products</SubHeadings>
                   <ProjectSection>
                     {experience.projects.map((project) => (
                       <TooltipWrapper key={project.title} text={project.title}>
