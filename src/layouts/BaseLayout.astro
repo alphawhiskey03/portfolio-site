@@ -1,10 +1,11 @@
 ---
 import "../styles/global.css";
 import Link from "../components/Link.astro";
+import { ThemeToggle } from "../components/ui/theme-toggle";
 const { title = "Hi there" } = Astro.props;
 ---
 
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,7 +15,14 @@ const { title = "Hi there" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <nav>
+      <div class="p-4">
+        <ThemeToggle client:load />
+      </div>
+    </nav>
+    <main>
+      <slot />
+    </main>
   </body>
   <footer>
     <div class="text-center">
