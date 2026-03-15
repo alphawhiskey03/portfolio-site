@@ -1,0 +1,21 @@
+---
+const { href } = Astro.props;
+---
+
+<a class="bg-red-500" href={href}><slot /></a>
+
+<!-- CSS is scoped to the file they are declared -->
+<style>
+  a {
+    decoration: none;
+  }
+</style>
+<!-- 
+To scope the style globally
+
+<style is:global>
+
+</style> -->
+
+<!-- scripts are not scoped applies to everything globally -->
+<script></script>
