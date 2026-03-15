@@ -4,7 +4,7 @@ import Link from "../components/Link.astro";
 const { title = "Hi there" } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,9 +14,24 @@ const { title = "Hi there" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <nav>
-      <Link href="/">Home</Link>
-    </nav>
     <slot />
   </body>
+  <footer>
+    <div class="text-center">
+      <Link href="https://therealvig.netlify.app"> © therealvig </Link>
+    </div>
+  </footer>
 </html>
+
+<script is:inline>
+  const theme = localStorage.getItem("theme");
+
+  if (
+    theme === "dark" ||
+    (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+  ) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+</script>

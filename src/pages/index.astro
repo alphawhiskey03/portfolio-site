@@ -1,7 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { LinkPageButtons, LinkType } from "@/components/LinkPageButtons";
+import { GooeyText } from "@/components/ui/gooey-text";
 ---
 
-<BaseLayout title="Home">
-  <h1>Home</h1>
+<BaseLayout title="Links">
+  <div class="flex flex-col justify-center items-center h-screen">
+    <GooeyText
+      client:load
+      texts={["Hey There!", "Let's get in touch!"]}
+      morphTime={1}
+      cooldownTime={0.5}
+      textClassName="font-bold tracking-tighter"
+    />
+    <div class="flex flex-col gap-5 mt-20">
+      <LinkPageButtons client:load type={LinkType.PORTFOLIO} />
+      <LinkPageButtons client:load type={LinkType.GITHUB} />
+      <LinkPageButtons client:load type={LinkType.LINKEDIN} />
+      <LinkPageButtons client:load type={LinkType.X} />
+    </div>
+  </div>
 </BaseLayout>
