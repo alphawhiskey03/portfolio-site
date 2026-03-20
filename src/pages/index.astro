@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { LinkPageButtons, LinkType } from "@/components/LinkPageButtons";
-import { GooeyText } from "@/components/ui/gooey-text";
+import { LinkButton, LinkType } from "@/components/LinkButton";
+import { GooeyText } from "@/components/jolly-ui/gooey-text";
 ---
 
 <BaseLayout title="Links">
@@ -14,10 +14,10 @@ import { GooeyText } from "@/components/ui/gooey-text";
       textClassName="font-bold tracking-tighter"
     />
     <div class="flex flex-col gap-5 mt-20">
-      <LinkPageButtons client:load type={LinkType.PORTFOLIO} />
-      <LinkPageButtons client:load type={LinkType.GITHUB} />
-      <LinkPageButtons client:load type={LinkType.LINKEDIN} />
-      <LinkPageButtons client:load type={LinkType.X} />
+      <LinkButton client:load type={LinkType.PORTFOLIO} viewMode="text" />
+      <LinkButton client:load type={LinkType.GITHUB} viewMode="text" />
+      <LinkButton client:load type={LinkType.LINKEDIN} viewMode="text" />
+      <LinkButton client:load type={LinkType.X} viewMode="text" />
     </div>
   </div>
 </BaseLayout>
