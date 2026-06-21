@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css";
 import Link from "../components/Link.astro";
-import { ThemeToggle } from "../components/ui/theme-toggle";
+import { ThemeToggle } from "../components/jolly-ui/theme-toggle";
+import { NeuroNoiseBackground } from "../components/client/NeuroNoiseBackground";
 const { title = "Hi there" } = Astro.props;
 ---
 
@@ -12,10 +13,20 @@ const { title = "Hi there" } = Astro.props;
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
   <body>
-    <nav>
+    <NeuroNoiseBackground client:load />
+    <nav
+      id="main-nav"
+      class="fixed top-0 left-0 right-0 z-50 -translate-y-full opacity-0 transition-all duration-300 ease-in-out backdrop-blur-md bg-background/80"
+    >
       <div class="p-4">
         <ThemeToggle client:load />
       </div>
@@ -30,16 +41,3 @@ const { title = "Hi there" } = Astro.props;
     </div>
   </footer>
 </html>
-
-<script is:inline>
-  const theme = localStorage.getItem("theme");
-
-  if (
-    theme === "dark" ||
-    (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-</script>

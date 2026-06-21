@@ -52,7 +52,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
     <LiquidMetalButton
       size="md"
       viewMode={viewMode}
-      icon={<Icon size={16} className="text-white" />}
+      icon={<Icon size={16} className="" />}
       label={text}
       onClick={onClick}
     />

@@ -22,7 +22,7 @@ interface LiquidMetalButtonProps {
 }
 
 export function LiquidMetalButton({
-  label = "Get Started",
+  label,
   onClick,
   viewMode = "text",
   size = "sm",
@@ -225,30 +225,24 @@ export function LiquidMetalButton({
               pointerEvents: "none",
             }}
           >
-            {viewMode === "icon" && (
-              <Sparkles
-                size={16}
-                style={{
-                  color: "#666",
-                  filter: "drop-shadow(0px 1px 2px rgba(0,0,0,0.5))",
-                }}
-              />
-            )}
+            {viewMode === "icon" && <>{icon}</>}
 
             {viewMode === "text" && (
               <>
                 {icon}
 
-                <span
-                  className="text-gray-500"
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {label}
-                </span>
+                {label && (
+                  <span
+                    className="text-gray-500"
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: 400,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {label}
+                  </span>
+                )}
               </>
             )}
           </div>
