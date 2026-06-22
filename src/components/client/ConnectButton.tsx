@@ -3,7 +3,9 @@ import LiquidMetalButton from "@/components/vengance-ui/liquid-metal";
 
 export function ConnectButton() {
   const handleClick = () => {
-    document.getElementById("contact-me")?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("contact-me")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

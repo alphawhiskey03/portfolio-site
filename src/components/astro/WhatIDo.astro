@@ -14,7 +14,7 @@ import { IoExtensionPuzzleOutline } from "react-icons/io5";
 
 const items = [
   {
-    title: "Frontend & SDK",
+    title: "UI & SDK",
     description:
       "Work across the web app, Specialized in building and maintaining SDKs, chrome extensions",
     technologies: [
@@ -42,20 +42,40 @@ const items = [
     technologies: [{ title: "N8n", icon: SiN8N }, { title: "ChromaDB" }],
   },
 ];
+
+const { centerContent = false } = Astro.props;
 ---
 
-<div class="flex flex-col gap-4 items-center justify-center mt-10">
+<div
+  class:list={["flex flex-col gap-4 mt-10", { "items-center": centerContent }]}
+>
   {
     items.map((item) => (
-      <div class="w-3/4 rounded-md border border-white/10 bg-white/5 p-4 backdrop-blur-md shadow-lg shadow-black/20">
+      <div class="w-full lg:w-3/4 rounded-md border border-white/10 bg-white/5 p-4 backdrop-blur-md shadow-lg shadow-black/20">
         <h3 class="text-xl font-bold">{item.title}</h3>
         <p>{item.description}</p>
 
-        <div class="flex flex-wrap items-center gap-2 mt-4">
+        <div
+          class="flex 
+             flex-wrap 
+             items-center 
+             gap-2 
+             mt-4"
+        >
           {item.technologies.map((tech) => {
             const Icon = tech.icon;
             return (
-              <div class="flex items-center gap-2 border border-white/10 rounded-md p-2 cursor-pointer hover:border-blue-300">
+              <div
+                class="flex 
+                   items-center 
+                   gap-2 
+                   border 
+                   border-white/10 
+                   rounded-md 
+                   p-2 
+                   cursor-pointer 
+                   hover:border-blue-300"
+              >
                 {Icon && (
                   <span>
                     <Icon />

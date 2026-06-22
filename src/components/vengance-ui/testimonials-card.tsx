@@ -201,7 +201,9 @@ export function TestimonialsCard({
               </p>
               <p className="text-sm text-gray-400">{activeItem.period}</p>
               <p className="text-sm text-white mt-1">
-                {activeItem.description}
+                {activeItem.description.length > 210
+                  ? activeItem.description.slice(0, 210) + "..."
+                  : activeItem.description}
               </p>
             </motion.div>
           </AnimatePresence>
@@ -209,7 +211,20 @@ export function TestimonialsCard({
 
         {/* Navigation Controls */}
         {showNavigation && items.length > 1 && (
-          <div className="col-start-1 md:col-start-2 md:row-start-3 flex gap-2  m-auto -mt-2 md:mt-4  md:m-0">
+          <div
+            className="col-start-1 
+               md:col-start-2 
+               md:row-start-3 
+               flex 
+               gap-2  
+               m-auto 
+               -mt-2 
+               md:mt-4  
+               md:m-0 
+               pt-10
+               lg:pt-0
+               "
+          >
             <button
               disabled={activeIndex === 0}
               onClick={handlePrev}

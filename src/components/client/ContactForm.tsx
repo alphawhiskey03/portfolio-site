@@ -29,7 +29,7 @@ const ContactForm = () => {
     <div className="flex justify-center lg:px-4 py-10 w-full lg:ml-78 ">
       <div
         className="w-full max-w-lg
-          rounded-xl p-8
+          rounded-xl p-4
           border border-white/10
           bg-white/5
           backdrop-blur-md
