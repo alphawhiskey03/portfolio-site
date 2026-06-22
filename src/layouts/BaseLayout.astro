@@ -2,23 +2,83 @@
 import "../styles/global.css";
 import Link from "../components/astro/Link.astro";
 import { NeuroNoiseBackground } from "../components/client/NeuroNoiseBackground";
-const { title = "Hi there" } = Astro.props;
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Vignesh Shanmugavelu — Software Engineer",
+  description = "Personal portfolio of Vignesh Shanmugavelu, a Software Engineer building elegant web experiences.",
+  ogImage = "/images/portfolio-banner.png",
+} = Astro.props;
+
+const canonicalURL = Astro.url.href;
+const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url).href;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Vignesh Shanmugavelu",
+  url: Astro.site?.href ?? canonicalURL,
+  jobTitle: "Software Engineer",
+  description,
+};
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph — WhatsApp, Slack, Teams, Instagram DMs, LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:site_name" content="therealvig" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:creator" content="@therealvig" />
+    <meta name="twitter:site" content="@therealvig" />
+
+    <!-- JSON-LD structured data -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+    />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
   </head>
   <body>
     <NeuroNoiseBackground client:load />
@@ -28,7 +88,7 @@ const { title = "Hi there" } = Astro.props;
       </div>
     </main>
     <footer>
-      <div class="text-center">
+      <div class="text-center pb-6">
         <Link href="https://therealvig.netlify.app"> © therealvig </Link>
       </div>
     </footer>
