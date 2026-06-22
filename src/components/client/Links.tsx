@@ -1,4 +1,4 @@
-import { LinkButton, LinkType } from "../LinkButton";
+import { LinkButton, LinkType } from "./LinkButton";
 
 const Links = () => {
   return (

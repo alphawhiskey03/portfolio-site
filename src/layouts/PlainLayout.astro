@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import Link from "../components/astro/Link.astro";
-import { NeuroNoiseBackground } from "../components/client/NeuroNoiseBackground";
 const { title = "Hi there" } = Astro.props;
 ---
 
@@ -21,16 +20,15 @@ const { title = "Hi there" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <NeuroNoiseBackground client:load />
     <main class="w-full min-h-screen">
       <div class="p-6 lg:p-10">
         <slot />
       </div>
     </main>
-    <footer>
-      <div class="text-center">
-        <Link href="https://therealvig.netlify.app"> © therealvig </Link>
-      </div>
-    </footer>
   </body>
+  <footer>
+    <div class="text-center">
+      <Link href="https://therealvig.netlify.app"> © therealvig </Link>
+    </div>
+  </footer>
 </html>

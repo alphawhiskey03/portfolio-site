@@ -1,23 +1,37 @@
 ---
+import SectionWrapper from "../components/astro/SectionWrapper.astro";
+import About from "../components/astro/About.astro";
+import Heading from "../components/astro/Heading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { LinkButton, LinkType } from "@/components/LinkButton";
-import { GooeyText } from "@/components/jolly-ui/gooey-text";
+import TechStack from "../components/astro/TechStack.astro";
+import WhatIDo from "../components/astro/WhatIDo.astro";
+import Hero from "../components/astro/Hero.astro";
+
+import ContactForm from "../components/client/ContactForm";
+import Links from "../components/client/Links";
 ---
 
-<BaseLayout title="Links">
-  <div class="flex flex-col justify-center items-center h-screen">
-    <GooeyText
-      client:load
-      texts={["Hey There!", "Let's get in touch!"]}
-      morphTime={1}
-      cooldownTime={0.5}
-      textClassName="font-bold tracking-tighter"
-    />
-    <div class="flex flex-col gap-5 mt-20">
-      <LinkButton client:load type={LinkType.PORTFOLIO} viewMode="text" />
-      <LinkButton client:load type={LinkType.GITHUB} viewMode="text" />
-      <LinkButton client:load type={LinkType.LINKEDIN} viewMode="text" />
-      <LinkButton client:load type={LinkType.X} viewMode="text" />
+<BaseLayout title="Portfolio">
+  <Hero />
+  <SectionWrapper id="about-me" className="lg:items-center">
+    <Heading>About Me</Heading>
+    <About />
+  </SectionWrapper>
+  <SectionWrapper id="tech-stack">
+    <Heading>Tech Stack</Heading>
+    <TechStack />
+  </SectionWrapper>
+  <SectionWrapper id="what-i-do">
+    <Heading>What I Do</Heading>
+    <WhatIDo />
+  </SectionWrapper>
+  <SectionWrapper id="contact-me">
+    <div class="flex flex-col">
+      <Heading>Contact Me</Heading>
+      <div class="mt-8">
+        <Links client:load />
+      </div>
     </div>
-  </div>
+    <ContactForm client:load />
+  </SectionWrapper>
 </BaseLayout>

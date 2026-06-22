@@ -1,11 +1,18 @@
 import { LiquidMetalButton } from "@/components/jolly-ui/liquid-metal-button";
-import { BsTwitterX, BsGithub, BsLinkedin, BsGlobe } from "react-icons/bs";
+import {
+  BsTwitterX,
+  BsGithub,
+  BsLinkedin,
+  BsGlobe,
+  BsSpotify,
+} from "react-icons/bs";
 
 export enum LinkType {
   GITHUB = "github",
   LINKEDIN = "linkedin",
   X = "x",
   PORTFOLIO = "portfolio",
+  SPOTIFY = "spotify",
 }
 
 const TypeToIcon: Record<
@@ -32,6 +39,11 @@ const TypeToIcon: Record<
     text: "Portfolio",
     href: "https://therealvig.netlify.app",
   },
+  [LinkType.SPOTIFY]: {
+    icon: BsSpotify,
+    text: "Spotify",
+    href: "https://open.spotify.com/user/b6awfaa74fomyatvls8jmxskc/playlists",
+  },
 };
 
 interface LinkButtonProps {
@@ -48,6 +60,7 @@ export const LinkButton: React.FC<LinkButtonProps> = ({
   const onClick = () => {
     window.open(href, "_blank");
   };
+
   return (
     <LiquidMetalButton
       size="md"

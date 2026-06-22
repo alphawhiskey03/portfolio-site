@@ -1,11 +1,15 @@
-"use client";
-
 import { NeuroNoise } from "@paper-design/shaders-react";
 
 export function NeuroNoiseBackground() {
   return (
     <NeuroNoise
-      style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: -1 }}
+      style={{
+        position: "fixed",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: -1,
+      }}
       speed={0.4}
       scale={1.2}
       colorBack="#050508"

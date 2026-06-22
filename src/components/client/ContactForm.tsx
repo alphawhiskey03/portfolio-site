@@ -26,7 +26,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex justify-center px-4 py-10 w-3/4 ml-78">
+    <div className="flex justify-center lg:px-4 py-10 w-full lg:ml-78 ">
       <div
         className="w-full max-w-lg
           rounded-xl p-8

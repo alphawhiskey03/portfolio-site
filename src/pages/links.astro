@@ -1,0 +1,24 @@
+---
+import PlainLayout from "../layouts/PlainLayout.astro";
+import { LinkButton, LinkType } from "@/components/client/LinkButton";
+import { GooeyText } from "@/components/jolly-ui/gooey-text";
+---
+
+<PlainLayout title="Links">
+  <div class="flex flex-col justify-center items-center h-screen">
+    <GooeyText
+      client:load
+      texts={["Hey There!", "Let's get in touch!"]}
+      morphTime={1}
+      cooldownTime={0.5}
+      textClassName="font-bold tracking-tighter"
+    />
+    <div class="flex flex-col gap-5 mt-20">
+      <LinkButton client:load type={LinkType.PORTFOLIO} viewMode="text" />
+      <LinkButton client:load type={LinkType.GITHUB} viewMode="text" />
+      <LinkButton client:load type={LinkType.LINKEDIN} viewMode="text" />
+      <LinkButton client:load type={LinkType.X} viewMode="text" />
+      <LinkButton client:load type={LinkType.SPOTIFY} viewMode="text" />
+    </div>
+  </div>
+</PlainLayout>

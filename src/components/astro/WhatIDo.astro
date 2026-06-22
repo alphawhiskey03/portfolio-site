@@ -1,0 +1,72 @@
+---
+// WhatIDo.astro
+import { FaReact, FaNodeJs } from "react-icons/fa";
+import { GrGraphQl } from "react-icons/gr";
+import { BsJavascript } from "react-icons/bs";
+import {
+  SiMongodb,
+  SiStripe,
+  SiN8N,
+  SiSocketdotio,
+  SiStorybook,
+} from "react-icons/si";
+import { IoExtensionPuzzleOutline } from "react-icons/io5";
+
+const items = [
+  {
+    title: "Frontend & SDK",
+    description:
+      "Work across the web app, Specialized in building and maintaining SDKs, chrome extensions",
+    technologies: [
+      { title: "React", icon: FaReact },
+      { title: "JavaScript", icon: BsJavascript },
+      { title: "WebSockets", icon: SiSocketdotio },
+      { title: "Storybook", icon: SiStorybook },
+      { title: "Chrome extensions", icon: IoExtensionPuzzleOutline },
+    ],
+  },
+  {
+    title: "Full stack applications",
+    description:
+      "Full stack applications with auth, payments and test suites, analytics and infra",
+    technologies: [
+      { title: "Node.js", icon: FaNodeJs },
+      { title: "GraphQL", icon: GrGraphQl },
+      { title: "Stripe", icon: SiStripe },
+      { title: "MongoDB", icon: SiMongodb },
+    ],
+  },
+  {
+    title: "AI workflows",
+    description: "N8n Ai workflows, chatbots, rag tools and agents",
+    technologies: [{ title: "N8n", icon: SiN8N }, { title: "ChromaDB" }],
+  },
+];
+---
+
+<div class="flex flex-col gap-4 items-center justify-center mt-10">
+  {
+    items.map((item) => (
+      <div class="w-3/4 rounded-md border border-white/10 bg-white/5 p-4 backdrop-blur-md shadow-lg shadow-black/20">
+        <h3 class="text-xl font-bold">{item.title}</h3>
+        <p>{item.description}</p>
+
+        <div class="flex flex-wrap items-center gap-2 mt-4">
+          {item.technologies.map((tech) => {
+            const Icon = tech.icon;
+            return (
+              <div class="flex items-center gap-2 border border-white/10 rounded-md p-2 cursor-pointer hover:border-blue-300">
+                {Icon && (
+                  <span>
+                    <Icon />
+                  </span>
+                )}
+                <span class="text-xs">{tech.title}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    ))
+  }
+</div>

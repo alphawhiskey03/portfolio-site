@@ -1,0 +1,26 @@
+---
+import { TypewriterText } from "../jolly-ui/typewritter-text";
+import Links from "../client/Links";
+import { ConnectButton } from "../client/ConnectButton";
+---
+
+<div class="relative h-screen w-full">
+  <div class="flex flex-col justify-center items-center gap-4 h-full">
+    <h1
+      class="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.1] text-transparent bg-clip-text bg-linear-to-b from-white via-white to-zinc-500 drop-shadow-sm"
+    >
+      Hello world,
+      <br /> I'm Vignesh!
+    </h1>
+
+    <TypewriterText
+      client:load
+      className="font-space font-bold text-blue-300"
+      words={["A Software Engineer", "A Movie Buff"]}
+    />
+
+    <Links client:load />
+
+    <ConnectButton client:load />
+  </div>
+</div>

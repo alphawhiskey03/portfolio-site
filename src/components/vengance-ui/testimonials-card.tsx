@@ -6,14 +6,12 @@ import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface TestimonialItem {
-  /** Unique identifier for the card */
   id: string | number;
-  /** Title displayed for the card */
   title: string;
-  /** Description text for the card */
+  subtitle: string;
   description: string;
-  /** Image URL/path for the card */
   image: string;
+  period: string;
 }
 
 interface TestimonialsCardProps {
@@ -198,15 +196,12 @@ export function TestimonialsCard({
               <h3 className="text-xl font-bold text-white">
                 {activeItem.title}
               </h3>
-              <p className="text-sm text-blue-300 font-bold mt-2">
-                {activeItem.description}
+              <p className="text-sm text-blue-300 font-light mt-2">
+                {activeItem.subtitle}
               </p>
-              <p className="text-sm text-white">
-                {" "}
-                work across the web app, SDK, and Chrome extension, shipping
-                major enhancements and rolling out features. On the AI front,
-                I’m working on rephrasing tools and RAG chatbots to level up the
-                product.
+              <p className="text-sm text-gray-400">{activeItem.period}</p>
+              <p className="text-sm text-white mt-1">
+                {activeItem.description}
               </p>
             </motion.div>
           </AnimatePresence>
