@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AboutSection from "../components/astro/AboutSection.astro";
+import TechStack from "../components/astro/TechStack.astro";
+import WhatIDo from "../components/astro/WhatIDo.astro";
+import Heading from "../components/astro/Heading.astro";
+import { FaHouse } from "react-icons/fa6";
+---
+
+<BaseLayout title="About — Vignesh Shanmugavelu">
+  <nav
+    id="about-nav"
+    class="fixed top-0 left-0 right-0 z-50 -translate-y-full opacity-0 transition-all duration-300 ease-in-out backdrop-blur-md bg-black/30"
+  >
+    <div class="px-6 py-6 flex items-center">
+      <a
+        href="/"
+        class="flex
+           items-center
+           gap-2
+           text-sm
+           text-neutral-300
+           hover:text-white transition-colors
+           border border-white/20 rounded-md p-2"
+      >
+        <FaHouse />
+      </a>
+    </div>
+  </nav>
+
+  <div class="lg:m-20">
+    <div class="my-10">
+      <Heading className="text-xl">Work Experience</Heading>
+      <AboutSection expanded={true} />
+    </div>
+    <div class="my-10">
+      <Heading className="text-xl">Tech Stack</Heading>
+      <div class="flex flex-row justify-center items-center">
+        <TechStack />
+      </div>
+    </div>
+    <div class="my-10">
+      <Heading className="text-xl">What I Do</Heading>
+      <WhatIDo centerContent />
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const nav = document.getElementById("about-nav");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+      nav?.classList.remove("-translate-y-full", "opacity-0");
+      nav?.classList.add("translate-y-0", "opacity-100");
+    } else {
+      nav?.classList.add("-translate-y-full", "opacity-0");
+      nav?.classList.remove("translate-y-0", "opacity-100");
+    }
+  });
+</script>

@@ -1,0 +1,137 @@
+---
+import TestimonialsCard from "../vengance-ui/testimonials-card";
+import { FaExpand } from "react-icons/fa";
+
+const { expanded = false } = Astro.props;
+
+const Experiences = [
+  {
+    id: 1,
+    title: "Userflow",
+    subtitle: "Software Development Engineer",
+    description:
+      "Worked on the Userflow web app, SDK, and Chrome extension, shipping major enhancements and rolling out features. On the AI front, I’m working on rephrasing tools and RAG chatbots to level up the product.",
+    period: "2024 - Present",
+    image: "./images/userflow.jpeg",
+  },
+  {
+    id: 2,
+    title: "BookMyRide",
+    subtitle: "Frontend Developer",
+    description:
+      "Book My Ride aims to provide a seamless and wide range of options when booking a taxi. I'm responsible for developing React components and Rest APIs and overseeing the maintenance of the frontend codebase, utilising Next.js and Redux, along with integrating Mapbox.",
+    period: "2024 - Present",
+    image: "./images/bmr-round.png",
+  },
+  {
+    id: 3,
+    title: "Coko foundation",
+    subtitle: "JavaScript Developer",
+    description:
+      "The Coko Foundation is a non-profit organisation that develops open-source publishing software for scholarly publishing. Within Coko's vibrant ecosystem, my role traverses an array of pivotal domains, including frontend and backend development, integration testing, unit testing, and manual testing. I consider myself extremely fortunate to work with and learn from some of the brightest and most humble people.",
+    period: "2024 - Present",
+    image: "/images/coko.jpeg",
+  },
+  {
+    id: 4,
+    title: "KS Global",
+    subtitle: "Web Developer",
+    description:
+      "As a freelance web developer at KS Globals, I had the opportunity to work on a wide range of projects and technologies. My principal responsibilities included creating and maintaining web-based applications with PHP, MySQL, and JavaScript.",
+    period: "2024 - Present",
+    image: "/images/k_s_globals_logo.jpeg",
+  },
+];
+---
+
+{
+  !expanded ? (
+    <div class="flex-1 flex flex-col items-center">
+      <p
+        class="text-lg
+        drop-shadow-sm
+        w-3/4
+        "
+      >
+        I am a passionate software developer with experience in JavaScript,
+        Next.js, React.js, GraphQL, and Cypress. I enjoy collaborating with
+        people, sharing my knowledge, and learning from my peers. As a
+        freelancer, I have experience working with clients from many industries,
+        delivering products that match their individual requirements. I enjoy
+        collaborating with people, sharing my knowledge, and learning from my
+        peers. Overall, I am a committed and motivated individual with a great
+        work ethic and a significant interest in software development.
+      </p>
+
+      <div class="flex flex-row justify-between items-center w-3/4 my-8">
+        <p class="text-xl font-bold text-white">Work Experience</p>
+        <button
+          id="expand-btn"
+          class="flex items-center gap-2 text-sm text-neutral-400 cursor-pointer hover:text-white transition-colors"
+        >
+          <FaExpand />
+          <span>more</span>
+        </button>
+      </div>
+      <TestimonialsCard client:load width={600} items={Experiences} />
+    </div>
+  ) : (
+    <div class="flex-1 flex flex-col gap-4">
+      {Experiences.map((exp) => (
+        <div
+          class="flex
+             flex-col
+             sm:flex-row
+             w-full
+             items-center
+             gap-5
+             p-6
+             rounded-xl
+             border
+             border-white/10
+             bg-white/5
+             backdrop-blur-md
+             shadow-lg
+             shadow-black/20"
+        >
+          <img
+            src={exp.image}
+            alt={exp.title}
+            class="w-20
+               h-20
+               sm:w-50
+               sm:h-50
+               rounded-full
+               object-cover
+               shrink-0
+               border
+               border-white/10"
+          />
+          <div class="flex flex-col gap-0.5 min-w-0 text-center sm:text-left">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-sm font-bold text-white text-start">
+                {exp.title}
+              </span>
+              <span class="text-xs text-neutral-400 font-mono">
+                {exp.period}
+              </span>
+            </div>
+            <span class="text-xs text-blue-300 text-start">{exp.subtitle}</span>
+            <p class="text-neutral-300 mt-1 leading-snug text-start">
+              {exp.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  const button = document.getElementById("expand-btn");
+  button?.addEventListener("click", () => {
+    navigate("/about");
+  });
+</script>

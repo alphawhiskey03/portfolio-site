@@ -1,6 +1,6 @@
 ---
 import SectionWrapper from "../components/astro/SectionWrapper.astro";
-import About from "../components/astro/About.astro";
+import AboutSection from "../components/astro/AboutSection.astro";
 import Heading from "../components/astro/Heading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TechStack from "../components/astro/TechStack.astro";
@@ -15,23 +15,26 @@ import Links from "../components/client/Links";
   <Hero />
   <SectionWrapper id="about-me" className="lg:items-center">
     <Heading>About Me</Heading>
-    <About />
+    <AboutSection />
   </SectionWrapper>
   <SectionWrapper id="tech-stack">
     <Heading>Tech Stack</Heading>
-    <TechStack />
+    <TechStack takeFullWidth />
   </SectionWrapper>
   <SectionWrapper id="what-i-do">
     <Heading>What I Do</Heading>
-    <WhatIDo />
+    <WhatIDo centerContent />
   </SectionWrapper>
   <SectionWrapper id="contact-me">
     <div class="flex flex-col">
       <Heading>Contact Me</Heading>
-      <div class="mt-8">
+      <div class="mt-8 hidden lg:block">
         <Links client:load />
       </div>
     </div>
     <ContactForm client:load />
+    <div class="visible lg:hidden">
+      <Links client:load />
+    </div>
   </SectionWrapper>
 </BaseLayout>
