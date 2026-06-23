@@ -47,12 +47,17 @@ const items = [
 const { centerContent = false } = Astro.props;
 ---
 
-<div class:list={["flex flex-col gap-4 mt-10", { "items-end-safe": true }]}>
+<div
+  class:list={[
+    "flex flex-col gap-4 mt-10 items-start",
+    { "items-end-safe": true },
+  ]}
+>
   {
     items.map((item) => (
       <div
-        class="w-full 
-      lg:w-[calc(50%-1rem)]
+        class="
+        w-full
       rounded-md 
       border 
       border-white/10

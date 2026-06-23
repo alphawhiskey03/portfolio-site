@@ -50,11 +50,9 @@ const { takeFullWidth = false } = Astro.props;
   {
     stacks.map((section) => (
       <>
-        <p class="text-md lg:text-2xl font-bold font-space text-center">
-          {section.title}
-        </p>
+        <p class="text-md lg:text-2xl font-bold font-space">{section.title}</p>
 
-        <div class="flex items-center gap-4 flex-wrap justify-center">
+        <div class="flex items-center gap-4 flex-wrap">
           {section.items.map(({ name, icon: Icon }) => (
             <div
               aria-label={name}

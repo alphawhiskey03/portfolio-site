@@ -1,14 +1,25 @@
 ---
 import { cn } from "@/lib/utils";
-const { className, id } = Astro.props;
+const { className, id, header, content } = Astro.props;
 ---
 
 <section
   class={cn(
-    `flex flex-col lg:flex-row lg:justify-between lg:items-center my-8`,
+    `flex flex-col lg:grid lg:grid-cols-[2fr_3fr] lg:items-center my-8`,
     className,
   )}
   id={id}
 >
-  <slot />
+  <slot name="header" />
+  <div
+    class="flex
+    w-full
+    align-center
+    justify-center
+    lg:pl-28
+    lg:align-start
+    lg:justify-start"
+  >
+    <slot name="content" />
+  </div>
 </section>

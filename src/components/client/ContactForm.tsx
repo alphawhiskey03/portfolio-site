@@ -26,72 +26,71 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex justify-center lg:px-4 py-10 w-full lg:ml-78 ">
-      <div
-        className="w-full max-w-lg
+    <div
+      className="w-full
           rounded-xl p-4
           border border-white/10
           bg-white/5
           backdrop-blur-md
           shadow-lg shadow-black/20"
-      >
-        <h2 className="text-2xl font-bold tracking-tight mb-1">Get in touch</h2>
-        <p className="text-sm text-zinc-400 mb-6">
-          I'll get back to you as soon as I can.
-        </p>
+    >
+      <h2 className="text-2xl font-bold tracking-tight mb-1">Get in touch</h2>
+      <p className="text-sm text-zinc-400 mb-6">
+        I'll get back to you as soon as I can.
+      </p>
 
-        {status === "success" ? (
-          <div className="flex flex-col items-center gap-3 py-8 text-center">
-            <span className="text-3xl">✓</span>
-            <p className="font-semibold">Message sent!</p>
-            <p className="text-sm text-zinc-400">Thanks for reaching out.</p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <Field label="Name">
-              <input
-                type="text"
-                className="focus:border-blue-300"
-                name="name"
-                placeholder="Your name"
-                value={form.name}
-                onChange={handleChange}
-                required
-              />
-            </Field>
+      {status === "success" ? (
+        <div className="flex flex-col items-center gap-3 py-8 text-center">
+          <span className="text-3xl">✓</span>
+          <p className="font-semibold">Message sent!</p>
+          <p className="text-sm text-zinc-400">Thanks for reaching out.</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <Field label="Name">
+            <input
+              type="text"
+              className="focus:border-blue-300"
+              name="name"
+              placeholder="Your name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </Field>
 
-            <Field label="Email">
-              <input
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                value={form.email}
-                onChange={handleChange}
-                required
-              />
-            </Field>
+          <Field label="Email">
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </Field>
 
-            <Field label="Message">
-              <textarea
-                name="query"
-                placeholder="What's on your mind?"
-                value={form.query}
-                onChange={handleChange}
-                rows={4}
-                required
-              />
-            </Field>
+          <Field label="Message">
+            <textarea
+              name="query"
+              placeholder="What's on your mind?"
+              value={form.query}
+              onChange={handleChange}
+              rows={4}
+              required
+            />
+          </Field>
 
-            {status === "error" && (
-              <p className="text-sm text-red-400">
-                Something went wrong. Please try again.
-              </p>
-            )}
+          {status === "error" && (
+            <p className="text-sm text-red-400">
+              Something went wrong. Please try again.
+            </p>
+          )}
 
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className="mt-1 w-full rounded-lg py-2.5 px-4
+          <button
+            type="submit"
+            disabled={status === "submitting"}
+            className="mt-1 w-full rounded-lg py-2.5 px-4
                 font-semibold text-sm tracking-wide
                 border border-white/10
                 bg-white/10 hover:bg-white/15
@@ -99,12 +98,11 @@ const ContactForm = () => {
                 transition-all duration-200
                 disabled:opacity-50 disabled:cursor-not-allowed
                 cursor-pointer"
-            >
-              {status === "submitting" ? "Sending…" : "Send message"}
-            </button>
-          </form>
-        )}
-      </div>
+          >
+            {status === "submitting" ? "Sending…" : "Send message"}
+          </button>
+        </form>
+      )}
     </div>
   );
 };

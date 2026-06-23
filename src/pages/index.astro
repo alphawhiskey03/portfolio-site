@@ -14,27 +14,47 @@ import Links from "../components/client/Links";
 <BaseLayout title="Portfolio">
   <Hero />
   <SectionWrapper id="about-me" className="lg:items-center">
-    <Heading>About Me</Heading>
-    <AboutSection />
+    <Fragment slot="header">
+      <Heading>About Me</Heading>
+    </Fragment>
+
+    <Fragment slot="content">
+      <AboutSection />
+    </Fragment>
   </SectionWrapper>
+
   <SectionWrapper id="tech-stack">
-    <Heading>Tech Stack</Heading>
-    <TechStack takeFullWidth />
+    <Fragment slot="header">
+      <Heading>Tech Stack</Heading>
+    </Fragment>
+
+    <Fragment slot="content">
+      <TechStack takeFullWidth />
+    </Fragment>
   </SectionWrapper>
+
   <SectionWrapper id="what-i-do">
-    <Heading>What I Do</Heading>
-    <WhatIDo centerContent />
+    <Fragment slot="header">
+      <Heading>What I Do</Heading>
+    </Fragment>
+
+    <Fragment slot="content">
+      <WhatIDo centerContent />
+    </Fragment>
   </SectionWrapper>
+
   <SectionWrapper id="contact-me">
-    <div class="flex flex-col">
-      <Heading>Contact Me</Heading>
-      <div class="mt-8 hidden lg:block">
-        <Links client:load />
+    <Fragment slot="header">
+      <div class="flex flex-col">
+        <Heading>Contact Me</Heading>
+        <div class="mt-8">
+          <Links client:load />
+        </div>
       </div>
-    </div>
-    <ContactForm client:load />
-    <div class="visible lg:hidden">
-      <Links client:load />
-    </div>
+    </Fragment>
+
+    <Fragment slot="content">
+      <ContactForm client:load />
+    </Fragment>
   </SectionWrapper>
 </BaseLayout>
