@@ -16,7 +16,7 @@ const items = [
   {
     title: "UI & SDK",
     description:
-      "Work across the web app, Specialized in building and maintaining SDKs, chrome extensions",
+      "Building and maintaining SDKs, Chrome extensions, and component libraries that developers actually want to use.",
     technologies: [
       { title: "React", icon: FaReact },
       { title: "JavaScript", icon: BsJavascript },
@@ -28,7 +28,7 @@ const items = [
   {
     title: "Full stack applications",
     description:
-      "Full stack applications with auth, payments and test suites, analytics and infra",
+      "End-to-end applications with auth, payments, test coverage, and the infrastructure holding it all together.",
     technologies: [
       { title: "Node.js", icon: FaNodeJs },
       { title: "GraphQL", icon: GrGraphQl },
@@ -38,7 +38,8 @@ const items = [
   },
   {
     title: "AI workflows",
-    description: "N8n Ai workflows, chatbots, rag tools and agents",
+    description:
+      "Integrating AI where it actually belongs in a product — RAG pipelines, automation workflows, and conversational interfaces that do real work.",
     technologies: [{ title: "N8n", icon: SiN8N }, { title: "ChromaDB" }],
   },
 ];
@@ -46,12 +47,21 @@ const items = [
 const { centerContent = false } = Astro.props;
 ---
 
-<div
-  class:list={["flex flex-col gap-4 mt-10", { "items-center": centerContent }]}
->
+<div class:list={["flex flex-col gap-4 mt-10", { "items-end-safe": true }]}>
   {
     items.map((item) => (
-      <div class="w-full lg:w-3/4 rounded-md border border-white/10 bg-white/5 p-4 backdrop-blur-md shadow-lg shadow-black/20">
+      <div
+        class="w-full 
+      lg:w-[calc(50%-1rem)]
+      rounded-md 
+      border 
+      border-white/10
+      bg-white/5 
+       p-4 
+       backdrop-blur-md 
+       shadow-lg 
+       shadow-black/20"
+      >
         <h3 class="text-xl font-bold">{item.title}</h3>
         <p>{item.description}</p>
 

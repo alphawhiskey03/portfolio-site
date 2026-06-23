@@ -1,16 +1,19 @@
 ---
+import { GET_EXPEREINCES } from "@/queries";
 import TestimonialsCard from "../vengance-ui/testimonials-card";
 import { FaExpand } from "react-icons/fa";
+import { sanityClient } from "sanity:client";
 
 const { expanded = false } = Astro.props;
-
+const experiences = await sanityClient.fetch(GET_EXPEREINCES);
+console.log(experiences);
 const Experiences = [
   {
     id: 1,
     title: "Userflow",
     subtitle: "Software Development Engineer",
     description:
-      "Worked on the Userflow web app, SDK, and Chrome extension, shipping major enhancements and rolling out features. On the AI front, I’m working on rephrasing tools and RAG chatbots to level up the product.",
+      "Full stack work across the web app, SDK, and Chrome extension. On the AI side, built rephrasing tools, auto-localisation, onboarding flow generation, and product insights — practical AI features that ship, not prototypes.",
     period: "2024 - Present",
     image: "./images/userflow.jpeg",
   },
@@ -19,7 +22,7 @@ const Experiences = [
     title: "BookMyRide",
     subtitle: "Frontend Developer",
     description:
-      "Book My Ride aims to provide a seamless and wide range of options when booking a taxi. I'm responsible for developing React components and Rest APIs and overseeing the maintenance of the frontend codebase, utilising Next.js and Redux, along with integrating Mapbox.",
+      "Built React components and REST APIs for a taxi booking platform. Owned frontend maintenance alongside backend development, integrating Mapbox for real-time ride tracking using Next.js and Redux.",
     period: "2024 - Present",
     image: "./images/bmr-round.png",
   },
@@ -28,7 +31,7 @@ const Experiences = [
     title: "Coko foundation",
     subtitle: "JavaScript Developer",
     description:
-      "The Coko Foundation is a non-profit organisation that develops open-source publishing software for scholarly publishing. Within Coko's vibrant ecosystem, my role traverses an array of pivotal domains, including frontend and backend development, integration testing, unit testing, and manual testing. I consider myself extremely fortunate to work with and learn from some of the brightest and most humble people.",
+      "Full stack contributions to open-source scholarly publishing software. Learnt to navigate a large codebase, practise test-driven development, and work with real CI/CD pipelines. Working with the Coko team was one of the more formative parts of my career: brilliant, humble people from across the world, different backgrounds and time zones. I consider it a privilege.",
     period: "2024 - Present",
     image: "/images/coko.jpeg",
   },
@@ -37,7 +40,7 @@ const Experiences = [
     title: "KS Global",
     subtitle: "Web Developer",
     description:
-      "As a freelance web developer at KS Globals, I had the opportunity to work on a wide range of projects and technologies. My principal responsibilities included creating and maintaining web-based applications with PHP, MySQL, and JavaScript.",
+      "Where my web development career started. Had the freedom to explore across the stack and across languages — and where I first understood what building for real clients actually means.",
     period: "2024 - Present",
     image: "/images/k_s_globals_logo.jpeg",
   },
@@ -53,14 +56,12 @@ const Experiences = [
         w-3/4
         "
       >
-        I am a passionate software developer with experience in JavaScript,
-        Next.js, React.js, GraphQL, and Cypress. I enjoy collaborating with
-        people, sharing my knowledge, and learning from my peers. As a
-        freelancer, I have experience working with clients from many industries,
-        delivering products that match their individual requirements. I enjoy
-        collaborating with people, sharing my knowledge, and learning from my
-        peers. Overall, I am a committed and motivated individual with a great
-        work ethic and a significant interest in software development.
+        4 years across the full stack — frontend, backend, e2e pipelines, SDK
+        internals, open source, and Chrome extensions. I've worked across the
+        surface area of modern web engineering, and more recently a large part
+        of my focus has been integrating AI into products in ways that actually
+        matter — not experiments, features that ship and stick. I go as deep as
+        the problem needs.
       </p>
 
       <div class="flex flex-row justify-between items-center w-3/4 my-8">
@@ -70,7 +71,7 @@ const Experiences = [
           class="flex items-center gap-2 text-sm text-neutral-400 cursor-pointer hover:text-white transition-colors"
         >
           <FaExpand />
-          <span>more</span>
+          <span>Expand</span>
         </button>
       </div>
       <TestimonialsCard client:load width={600} items={Experiences} />
