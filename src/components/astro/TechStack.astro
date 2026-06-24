@@ -42,21 +42,21 @@ const { takeFullWidth = false } = Astro.props;
 ---
 
 <div
-  class:list={[
-    "flex flex-col items-center gap-4 mt-10",
-    { "flex-1": takeFullWidth },
-  ]}
+  class:list={["flex flex-col items-start gap-4", { "flex-1": takeFullWidth }]}
 >
   {
     stacks.map((section) => (
       <>
-        <p class="text-md lg:text-2xl font-bold font-space">{section.title}</p>
+        <p class="text-md lg:text-2xl ml-5 font-bold font-space">
+          {section.title}
+        </p>
 
         <div class="flex items-center gap-4 flex-wrap">
           {section.items.map(({ name, icon: Icon }) => (
-            <div
-              aria-label={name}
-              class="p-4 
+            <div class="flex flex-col gap-2 group">
+              <div
+                aria-label={name}
+                class="p-4 
                  rounded-xl 
                  text-5xl 
                  border 
@@ -71,8 +71,12 @@ const { takeFullWidth = false } = Astro.props;
                  hover:bg-white/10 
                  hover:border-blue-300 
                  hover:text-blue-300"
-            >
-              <Icon />
+              >
+                <Icon />
+              </div>
+              <span class="text-xs text-center group-hover:text-blue-300">
+                {name}
+              </span>
             </div>
           ))}
         </div>

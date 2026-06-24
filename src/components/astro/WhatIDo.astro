@@ -49,8 +49,8 @@ const { centerContent = false } = Astro.props;
 
 <div
   class:list={[
-    "flex flex-col gap-4 mt-10 items-start",
-    { "items-end-safe": true },
+    "flex flex-col gap-4 items-start",
+    { "items-end-safe": centerContent },
   ]}
 >
   {
@@ -89,10 +89,11 @@ const { centerContent = false } = Astro.props;
                    rounded-md 
                    p-2 
                    cursor-pointer 
-                   hover:border-blue-300"
+                   hover:border-blue-300
+                   group"
               >
                 {Icon && (
-                  <span>
+                  <span class="group-hover:text-blue-300">
                     <Icon />
                   </span>
                 )}
