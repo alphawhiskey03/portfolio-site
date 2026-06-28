@@ -4,19 +4,12 @@ import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { Experience } from "@/queries/types";
+import { getFormattedDateAndExperience, urlFor } from "@/utils";
 
-interface TestimonialItem {
-  id: string | number;
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-  period: string;
-}
-
-interface TestimonialsCardProps {
+interface ExperienceCardProps {
   /** Array of testimonial items to display */
-  items: TestimonialItem[];
+  items: Experience[];
   /** Additional CSS classes for the container */
   className?: string;
   /** Width of the card stack (default: 400) */
@@ -31,7 +24,7 @@ interface TestimonialsCardProps {
   autoPlayInterval?: number;
 }
 
-export function TestimonialsCard({
+export function ExperienceCard({
   items,
   className,
   width = 400,
@@ -39,12 +32,17 @@ export function TestimonialsCard({
   showCounter = true,
   autoPlay = false,
   autoPlayInterval = 3000,
-}: TestimonialsCardProps) {
+}: ExperienceCardProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const activeItem = items[activeIndex];
+
+  const { formattedDate, duration } = getFormattedDateAndExperience(
+    activeItem.startDate,
+    activeItem.endDate,
+  );
 
   // Auto-play effect
   React.useEffect(() => {
@@ -90,9 +88,10 @@ export function TestimonialsCard({
   return (
     <motion.div
       className={cn(
-        "flex items-center justify-center p-8 rounded-xl border",
+        "flex items-center justify-center p-8 rounded-xl border w-full",
         className,
       )}
+      style={{ maxWidth: `${width}px` }}
       animate={{
         backgroundColor: isTransitioning
           ? "rgba(255,255,255,0)"
@@ -108,8 +107,8 @@ export function TestimonialsCard({
       transition={{ duration: 0.4, ease: "easeInOut" }}
     >
       <div
-        className="relative grid  grid-cols-[1fr]  md:grid-cols-[1fr_1fr] md:grid-rows-[auto_auto_auto] gap-x-8 gap-y-2 w-full "
-        style={{ perspective: "1400px", maxWidth: `${width}px` }}
+        className="relative grid grid-cols-[1fr] md:grid-cols-[auto_1fr] md:grid-rows-[auto_auto_auto] gap-x-8 gap-y-2 w-full"
+        style={{ perspective: "1400px" }}
       >
         {/* Counter */}
         {showCounter && (
@@ -119,16 +118,18 @@ export function TestimonialsCard({
         )}
 
         {/* Image Card Stack */}
-        <div className="row-start-2  col-start-1 md:row-start-1 row-span-3 relative w-full aspect-square">
+        <div className="row-start-2 col-start-1 md:row-start-1 row-span-3 relative w-56 h-56 shrink-0 self-center">
           <AnimatePresence custom={direction}>
             {items.map((item, index) => {
               const isActive = index === activeIndex;
               const offset = index - activeIndex;
 
+              const imageUrl = urlFor(item.logo).url();
+
               return (
                 <motion.div
                   key={item.id}
-                  className="absolute inset-0 w-full h-ful overflow-hidden border-[6px] border-white/10 bg-white/5 backdrop-blur-md shadow-2xl rounded-[50%]"
+                  className="absolute inset-0 w-full h-full overflow-hidden border-[6px] border-white/10 bg-white/5 backdrop-blur-md shadow-2xl rounded-[50%]"
                   initial={{
                     x: offset * 15,
                     y: Math.abs(offset) * 6,
@@ -172,8 +173,8 @@ export function TestimonialsCard({
                   }}
                 >
                   <img
-                    src={item.image}
-                    alt={item.title}
+                    src={imageUrl}
+                    alt={item.role}
                     className="w-full h-full object-cover"
                     draggable={false}
                   />
@@ -184,7 +185,7 @@ export function TestimonialsCard({
         </div>
 
         {/* Text Area */}
-        <div className="col-start-1 md:col-start-2   md:row-start-1 flex flex-col justify-center min-h-[120px]">
+        <div className="col-start-1 md:col-start-2 md:row-start-1 flex flex-col justify-center h-56 overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeItem.id}
@@ -193,17 +194,17 @@ export function TestimonialsCard({
               exit={{ opacity: 0, y: -25 }}
               transition={{ duration: 0.35 }}
             >
-              <h3 className="text-xl font-bold text-white">
-                {activeItem.title}
+              <h3 className="text-xl font-bold text-white line-clamp-1">
+                {activeItem.role}
               </h3>
               <p className="text-sm text-blue-300 font-light mt-2">
-                {activeItem.subtitle}
+                {activeItem.orgName}
               </p>
-              <p className="text-sm text-gray-400">{activeItem.period}</p>
-              <p className="text-sm text-white mt-1">
-                {activeItem.description.length > 210
-                  ? activeItem.description.slice(0, 210) + "..."
-                  : activeItem.description}
+              <p className="text-xs text-gray-400">
+                {formattedDate} | {duration}
+              </p>
+              <p className="text-sm text-white mt-1 line-clamp-7">
+                {activeItem.description}
               </p>
             </motion.div>
           </AnimatePresence>
@@ -258,4 +259,4 @@ export function TestimonialsCard({
   );
 }
 
-export default TestimonialsCard;
+export default ExperienceCard;

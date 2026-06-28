@@ -4,6 +4,7 @@ import {
   type ReactElement,
   type ChangeEvent,
 } from "react";
+import { BiCommentAdd } from "react-icons/bi";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -17,12 +18,34 @@ const ContactForm = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: { preventDefault(): void }) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("submitting");
-    // Replace with your actual form endpoint (e.g. Formspree, Resend, etc.)
-    await new Promise((r) => setTimeout(r, 1000));
-    setStatus("success");
+
+    // 1. Convert form state values into standard URL-encoded string data for Netlify
+    const formData = new URLSearchParams({
+      "form-name": "contact", // Matches the 'name' attribute on your HTML form
+      ...form,
+    }).toString();
+
+    try {
+      // 2. Submit via POST to your root domain where Netlify routes process requests
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData,
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setForm({ name: "", email: "", query: "" }); // Reset fields
+      } else {
+        throw new Error("Netlify bad response");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+    }
   };
 
   return (
@@ -34,46 +57,66 @@ const ContactForm = () => {
           backdrop-blur-md
           shadow-lg shadow-black/20"
     >
-      <h2 className="text-2xl font-bold tracking-tight mb-1">Get in touch</h2>
-      <p className="text-sm text-zinc-400 mb-6">
-        I'll get back to you as soon as I can.
-      </p>
+      <BiCommentAdd className="text-4xl mb-2" />
+      <p className="text-sm text-zinc-400 mb-6">I promise to get back Asap!</p>
 
       {status === "success" ? (
         <div className="flex flex-col items-center gap-3 py-8 text-center">
-          <span className="text-3xl">✓</span>
-          <p className="font-semibold">Message sent!</p>
+          <span className="text-3xl text-green-400">✓</span>
+          <p className="font-semibold text-white">Message sent! ✨</p>
           <p className="text-sm text-zinc-400">Thanks for reaching out.</p>
+          <button
+            onClick={() => setStatus("idle")}
+            className="mt-2 text-xs text-blue-400 hover:underline cursor-pointer"
+          >
+            Send another message
+          </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <Field label="Name">
+        <form
+          name="contact"
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+        >
+          {/* Required hidden input for Netlify form detection inside React integrations */}
+          <input type="hidden" name="form-name" value="contact" />
+
+          {/* Hidden Honeypot field to filter spam bots */}
+          <p className="hidden">
+            <label>
+              Don’t fill this out: <input name="bot-field" />
+            </label>
+          </p>
+
+          <Field label="Who's speaking?">
             <input
               type="text"
               className="focus:border-blue-300"
               name="name"
-              placeholder="Your name"
+              placeholder="Bruce Wayne (Wayne Enterprises)"
               value={form.name}
               onChange={handleChange}
               required
             />
           </Field>
 
-          <Field label="Email">
+          <Field label="Where do i reply?">
             <input
               type="email"
               name="email"
-              placeholder="you@example.com"
+              placeholder="where-should-i-reply@company.com"
               value={form.email}
               onChange={handleChange}
               required
             />
           </Field>
 
-          <Field label="Message">
+          <Field label="The Big Idea">
             <textarea
               name="query"
-              placeholder="What's on your mind?"
+              placeholder="Tell me about your vision, your timeline, or your favorite movie..."
               value={form.query}
               onChange={handleChange}
               rows={4}
@@ -97,9 +140,9 @@ const ContactForm = () => {
                 backdrop-blur-sm
                 transition-all duration-200
                 disabled:opacity-50 disabled:cursor-not-allowed
-                cursor-pointer"
+                cursor-pointer text-white"
           >
-            {status === "submitting" ? "Sending…" : "Send message"}
+            {status === "submitting" ? "Sending…" : "Get in Touch ✉️"}
           </button>
         </form>
       )}
@@ -109,7 +152,7 @@ const ContactForm = () => {
 
 const fieldClass = `w-full rounded-lg px-3.5 py-2.5
   bg-white/5 border border-white/10
-  text-sm placeholder:text-zinc-500
+  text-sm placeholder:text-zinc-500 text-white
   focus:outline-none focus:border-blue-300 focus:bg-white/8
   transition-all duration-150
   resize-none`;

@@ -1,50 +1,13 @@
 ---
 import { GET_EXPEREINCES } from "@/queries";
-import TestimonialsCard from "../vengance-ui/testimonials-card";
+import TestimonialsCard from "../vengance-ui/experience-card";
 import { FaExpand } from "react-icons/fa";
 import { sanityClient } from "sanity:client";
+import type { Experience } from "@/queries/types";
+import { urlFor } from "@/utils";
 
-const { expanded = false } = Astro.props;
-const experiences = await sanityClient.fetch(GET_EXPEREINCES);
-console.log(experiences);
-const Experiences = [
-  {
-    id: 1,
-    title: "Userflow",
-    subtitle: "Software Development Engineer",
-    description:
-      "Full stack work across the web app, SDK, and Chrome extension. On the AI side, built rephrasing tools, auto-localisation, onboarding flow generation, and product insights — practical AI features that ship, not prototypes.",
-    period: "2024 - Present",
-    image: "./images/userflow.jpeg",
-  },
-  {
-    id: 2,
-    title: "BookMyRide",
-    subtitle: "Frontend Developer",
-    description:
-      "Built React components and REST APIs for a taxi booking platform. Owned frontend maintenance alongside backend development, integrating Mapbox for real-time ride tracking using Next.js and Redux.",
-    period: "2024 - Present",
-    image: "./images/bmr-round.png",
-  },
-  {
-    id: 3,
-    title: "Coko foundation",
-    subtitle: "JavaScript Developer",
-    description:
-      "Full stack contributions to open-source scholarly publishing software. Learnt to navigate a large codebase, practise test-driven development, and work with real CI/CD pipelines. Working with the Coko team was one of the more formative parts of my career: brilliant, humble people from across the world, different backgrounds and time zones. I consider it a privilege.",
-    period: "2024 - Present",
-    image: "/images/coko.jpeg",
-  },
-  {
-    id: 4,
-    title: "KS Global",
-    subtitle: "Web Developer",
-    description:
-      "Where my web development career started. Had the freedom to explore across the stack and across languages — and where I first understood what building for real clients actually means.",
-    period: "2024 - Present",
-    image: "/images/k_s_globals_logo.jpeg",
-  },
-];
+const { expanded = false, aboutMe } = Astro.props;
+const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
 ---
 
 {
@@ -56,12 +19,7 @@ const Experiences = [
         w-full
         "
       >
-        4 years across the full stack — frontend, backend, e2e pipelines, SDK
-        internals, open source, and Chrome extensions. I've worked across the
-        surface area of modern web engineering, and more recently a large part
-        of my focus has been integrating AI into products in ways that actually
-        matter — not experiments, features that ship and stick. <br />I go as
-        deep as the problem needs.
+        {aboutMe}
       </p>
 
       <div class="flex flex-row justify-between items-center w-full my-8">
@@ -82,11 +40,11 @@ const Experiences = [
           <span>Expand</span>
         </button>
       </div>
-      <TestimonialsCard client:load width={600} items={Experiences} />
+      <TestimonialsCard client:load width={600} items={experiences} />
     </div>
   ) : (
     <div class="flex-1 flex flex-col gap-4">
-      {Experiences.map((exp) => (
+      {experiences.map((exp) => (
         <div
           class="flex
              flex-col
@@ -104,8 +62,8 @@ const Experiences = [
              shadow-black/20"
         >
           <img
-            src={exp.image}
-            alt={exp.title}
+            src={urlFor(exp.logo).url()}
+            alt={exp.role}
             class="w-20
                h-20
                sm:w-50
@@ -119,13 +77,11 @@ const Experiences = [
           <div class="flex flex-col gap-0.5 min-w-0 text-center sm:text-left">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-sm font-bold text-white text-start">
-                {exp.title}
+                {exp.role}
               </span>
-              <span class="text-xs text-neutral-400 font-mono">
-                {exp.period}
-              </span>
+              <span class="text-xs text-neutral-400 font-mono">{""}</span>
             </div>
-            <span class="text-xs text-blue-300 text-start">{exp.subtitle}</span>
+            <span class="text-xs text-blue-300 text-start">{exp.orgName}</span>
             <p class="text-neutral-300 mt-1 leading-snug text-start">
               {exp.description}
             </p>

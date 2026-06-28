@@ -17,8 +17,8 @@ export default defineConfig({
   integrations: [
     react(),
     sanity({
-      projectId: env.SANITY_PROJECT_ID,
-      dataset: env.SANITY_DATASET ?? "production",
+      projectId: env.PUBLIC_SANITY_PROJECT_ID,
+      dataset: env.PUBLIC_SANITY_DATASET ?? "production",
     }),
   ],
 });

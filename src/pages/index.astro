@@ -9,9 +9,18 @@ import Hero from "../components/astro/Hero.astro";
 
 import ContactForm from "../components/client/ContactForm";
 import Links from "../components/client/Links";
+import { sanityClient } from "sanity:client";
+import { GET_MAINCONTENT } from "@/queries";
+
+const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
 ---
 
 <BaseLayout title="Portfolio">
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <textarea name="query"></textarea>
+  </form>
   <Hero />
   <SectionWrapper id="about-me" className="lg:items-center">
     <Fragment slot="header">
@@ -19,7 +28,7 @@ import Links from "../components/client/Links";
     </Fragment>
 
     <Fragment slot="content">
-      <AboutSection />
+      <AboutSection aboutMe={mainContent.aboutMe} />
     </Fragment>
   </SectionWrapper>
 
@@ -27,7 +36,6 @@ import Links from "../components/client/Links";
     <Fragment slot="header">
       <Heading>Tech Stack</Heading>
     </Fragment>
-
     <Fragment slot="content">
       <TechStack takeFullWidth />
     </Fragment>
@@ -37,7 +45,6 @@ import Links from "../components/client/Links";
     <Fragment slot="header">
       <Heading>What I Do</Heading>
     </Fragment>
-
     <Fragment slot="content">
       <WhatIDo centerContent />
     </Fragment>

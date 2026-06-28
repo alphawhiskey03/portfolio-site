@@ -1,74 +1,75 @@
 export const GET_MAINCONTENT = `*[_type=="main-content"][0]{
-    gist,
-    about_me,
-    tech_description,
-    mobile,
-    email,
-    city,
-    geo_region,
-    state,
-    country,
-    keywords
-    
+  gist,
+  "aboutMe": about_me,
+  "techDescription": tech_description,
+  mobile,
+  email,
+  city,
+  "geoRegion": geo_region,
+  state,
+  country,
+  keywords
 }`;
 
-export const GET_PROJECTS = `*[_type == "projects"] {
-    _id,
-    title,
-    description,
-    thumbnail,
-    category,
-    technologies[]-> {
-      _id,
-      title
-    },
-    source,
-    link,
-    project_type,
-  } | order(order asc)`;
+export const GET_PROJECTS = `*[_type == "projects"] | order(order asc) {
+  "id":_id,
+  title,
+  description,
+  thumbnail,
+  category,
+  technologies[]->{
+    "id": _id,
+    title
+  },
+  source,
+  link,
+  "projectType": project_type
+}`;
 
-export const GET_TECHNOLOGIES = `*[_type=="technology"]{
+export const GET_TECHNOLOGIES = `*[_type=="technology"] | order(category asc){
   title,
   link,
   category,
-    featured,
+  featured,
   icon->{
     name,
     packageName
   }
-} | order(category asc)`;
+}`;
 
-export const GET_EXPEREINCES = `*[_type=="experience"]{
-  org_name,
+export const GET_EXPEREINCES = `*[_type=="experience"] | order(start_date desc){
+  "id": _id, 
+  "orgName": org_name,
   description,
   role,
   logo,
-  org_link,
-  start_date,
-  end_date,
+  "orgLink": org_link,
+  "startDate": start_date,
+  "endDate": end_date,
 
   technologies[]->{
     title,
     icon->{
-    name,
-    packageName,
+      name,
+      packageName
     }
   },
+
   projects[]->{
     title,
-    thumbnail, 
-    link,
+    thumbnail,
+    link
   }
-} | order(start_date desc)
-  `;
-  
+} `;
+
 export const GET_TIMELINE = `*[_type=="timeline"] | order(year asc)`;
-export const GET_SOCIALMEDIA = `*[_type=="social-media"]{
+
+export const GET_SOCIALMEDIA = `*[_type=="social-media"] | order(order asc) {
   title,
   link,
   main,
   icon->{
     name,
-    packageName,
-  } 
-} | order(order asc)`;
+    packageName
+  }
+}`;
