@@ -175,8 +175,11 @@ export function ExperienceCard({
                   <img
                     src={imageUrl}
                     alt={item.role}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover cursor-pointer"
                     draggable={false}
+                    onClick={() => {
+                      window.open(item.orgLink, "_blank");
+                    }}
                   />
                 </motion.div>
               );
@@ -230,7 +233,7 @@ export function ExperienceCard({
               disabled={activeIndex === 0}
               onClick={handlePrev}
               className={cn(
-                "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all",
+                "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all cursor-pointer",
                 activeIndex === 0
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-white/10 hover:border-white/20 hover:scale-105",
@@ -243,7 +246,7 @@ export function ExperienceCard({
               disabled={activeIndex === items.length - 1}
               onClick={handleNext}
               className={cn(
-                "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all",
+                "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all cursor-pointer",
                 activeIndex === items.length - 1
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-white/10 hover:border-white/20 hover:scale-105",

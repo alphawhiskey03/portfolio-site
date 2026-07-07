@@ -39,7 +39,7 @@ const items = [
   {
     title: "AI workflows",
     description:
-      "Integrating AI where it actually belongs in a product — RAG pipelines, automation workflows, and conversational interfaces that do real work.",
+      "Integrating AI where it actually belongs in a product - RAG pipelines, automation workflows, and conversational interfaces that do real work.",
     technologies: [{ title: "N8n", icon: SiN8N }, { title: "ChromaDB" }],
   },
 ];
@@ -67,7 +67,7 @@ const { centerContent = false } = Astro.props;
        shadow-lg 
        shadow-black/20"
       >
-        <h3 class="text-xl font-bold">{item.title}</h3>
+        <h3 class="text-lg  font-mono mb-2 font-bold">{item.title}</h3>
         <p>{item.description}</p>
 
         <div
@@ -90,7 +90,10 @@ const { centerContent = false } = Astro.props;
                    p-2 
                    cursor-pointer 
                    hover:border-blue-300
-                   group"
+                   group
+                   font-mono
+                   text-xs
+                   "
               >
                 {Icon && (
                   <span class="group-hover:text-blue-300">

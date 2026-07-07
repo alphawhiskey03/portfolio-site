@@ -142,7 +142,7 @@ const ContactForm = () => {
                 disabled:opacity-50 disabled:cursor-not-allowed
                 cursor-pointer text-white"
           >
-            {status === "submitting" ? "Sending…" : "Get in Touch ✉️"}
+            {status === "submitting" ? "Sending…" : "Get in Touch"}
           </button>
         </form>
       )}

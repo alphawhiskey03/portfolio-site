@@ -15,7 +15,7 @@ import { GET_MAINCONTENT } from "@/queries";
 const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
 ---
 
-<BaseLayout title="Portfolio">
+<BaseLayout>
   <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="text" name="name" />
     <input type="email" name="email" />
@@ -53,9 +53,19 @@ const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
   <SectionWrapper id="contact-me">
     <Fragment slot="header">
       <div class="flex flex-col">
-        <Heading>Contact Me</Heading>
-        <div class="mb-8">
+        <Heading>Contact</Heading>
+        <div class="flex flex-col gap-4 items-center mb-8 lg:items-start">
           <Links client:load />
+          <a
+            href="mailto:vigneshshanmugavelu03@gmail.com"
+            class="text-mono text-gray-200">vigneshshanmugavelu03@gmail.com</a
+          >
+          <a
+            href="https://maps.app.goo.gl/L91iPn9L8ZRcjhq79"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-sm">Coimbatore, India</a
+          >
         </div>
       </div>
     </Fragment>
