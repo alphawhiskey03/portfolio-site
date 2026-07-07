@@ -1,5 +1,6 @@
 export const GET_MAINCONTENT = `*[_type=="main-content"][0]{
   gist,
+  role,
   "aboutMe": about_me,
   "techDescription": tech_description,
   mobile,

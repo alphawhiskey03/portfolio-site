@@ -9,6 +9,7 @@ export interface SanityImage {
 export interface MainContent {
   gist: string;
   aboutMe: string;
+  role: string;
   techDescription: string;
   mobile: string;
   email: string;

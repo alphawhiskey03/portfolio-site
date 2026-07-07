@@ -21,7 +21,7 @@ const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
     <input type="email" name="email" />
     <textarea name="query"></textarea>
   </form>
-  <Hero />
+  <Hero role={mainContent.role} />
   <SectionWrapper id="about-me" className="lg:items-center">
     <Fragment slot="header">
       <Heading>About Me</Heading>

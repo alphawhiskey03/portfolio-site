@@ -2,6 +2,8 @@
 import { TypewriterText } from "../jolly-ui/typewritter-text";
 import Links from "../client/Links";
 import { ConnectButton } from "../client/ConnectButton";
+
+const { role } = Astro.props;
 ---
 
 <div class="relative h-screen w-full">
@@ -16,7 +18,7 @@ import { ConnectButton } from "../client/ConnectButton";
     <TypewriterText
       client:load
       className="font-space font-bold text-blue-300"
-      words={["Software Developmnet Engineer"]}
+      words={[role]}
     />
 
     <Links client:load />
