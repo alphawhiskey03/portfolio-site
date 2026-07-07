@@ -1,10 +1,11 @@
 ---
 import { GET_EXPEREINCES } from "@/queries";
-import TestimonialsCard from "../vengance-ui/experience-card";
+import ExperienceCard from "../vengance-ui/experience-card";
 import { FaExpand } from "react-icons/fa";
 import { sanityClient } from "sanity:client";
 import type { Experience } from "@/queries/types";
 import { urlFor } from "@/utils";
+import IconComponent from "../client/IconComponent";
 
 const { expanded = false, aboutMe } = Astro.props;
 const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
@@ -17,13 +18,14 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
         class="text-lg
         drop-shadow-sm
         w-full
+        font-mono
         "
       >
         {aboutMe}
       </p>
 
       <div class="flex flex-row justify-between items-center w-full my-8">
-        <p class="text-xl font-bold text-white">Work Experience</p>
+        <p class="text-xl font-bold text-white font-mono">Work Experience</p>
         <button
           id="expand-btn"
           class="flex 
@@ -40,7 +42,7 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
           <span>Expand</span>
         </button>
       </div>
-      <TestimonialsCard client:load width={600} items={experiences} />
+      <ExperienceCard client:load width={600} items={experiences} />
     </div>
   ) : (
     <div class="flex-1 flex flex-col gap-4">
@@ -63,7 +65,8 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
         >
           <img
             src={urlFor(exp.logo).url()}
-            alt={exp.role}
+            alt={exp.orgName}
+            data-org-link={exp.orgLink}
             class="w-20
                h-20
                sm:w-50
@@ -72,7 +75,8 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
                object-cover
                shrink-0
                border
-               border-white/10"
+               border-white/10
+               cursor-pointer"
           />
           <div class="flex flex-col gap-0.5 min-w-0 text-center sm:text-left">
             <div class="flex items-center gap-2 flex-wrap">
@@ -81,10 +85,44 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
               </span>
               <span class="text-xs text-neutral-400 font-mono">{""}</span>
             </div>
-            <span class="text-xs text-blue-300 text-start">{exp.orgName}</span>
+            <a
+              href={exp.orgLink}
+              target="_blank"
+              class="text-xs text-blue-300 text-start"
+            >
+              {exp.orgName}
+            </a>
             <p class="text-neutral-300 mt-1 leading-snug text-start">
               {exp.description}
             </p>
+            <div class="flex flex-row gap-2 mt-2 flex-wrap">
+              {exp.technologies.map((tech) => (
+                <div
+                  class="flex 
+                   items-center 
+                   gap-2 
+                   border 
+                   border-white/10 
+                   rounded-md 
+                   p-2 
+                   cursor-pointer 
+                   hover:border-blue-300
+                   group"
+                >
+                  {tech.icon && (
+                    <span class="group-hover:text-blue-300">
+                      <IconComponent
+                        client:load
+                        packageName={tech.icon.packageName}
+                        icon={tech.icon.name}
+                        iconProps={{}}
+                      />
+                    </span>
+                  )}
+                  <span class="text-xs font-mono">{tech.title}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ))}
@@ -98,5 +136,14 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
   const button = document.getElementById("expand-btn");
   button?.addEventListener("click", () => {
     navigate("/about");
+  });
+
+  document.addEventListener("click", (event) => {
+    const img = (event.target as HTMLElement)?.closest<HTMLImageElement>(
+      "img[data-org-link]",
+    );
+    if (img?.dataset.orgLink) {
+      window.open(img.dataset.orgLink, "_blank");
+    }
   });
 </script>
