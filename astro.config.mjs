@@ -5,12 +5,13 @@ import { loadEnv } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import sanity from "@sanity/astro";
+import sitemap from "@astrojs/sitemap";
 
 const env = loadEnv(process.env.NODE_ENV ?? "development", process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://therealvig.netlify.app",
+  site: "https://therealvig.app",
   vite: {
     plugins: [tailwindcss()],
   },
@@ -20,5 +21,6 @@ export default defineConfig({
       projectId: env.PUBLIC_SANITY_PROJECT_ID,
       dataset: env.PUBLIC_SANITY_DATASET ?? "production",
     }),
+    sitemap(),
   ],
 });
