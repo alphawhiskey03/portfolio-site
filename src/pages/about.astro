@@ -5,9 +5,13 @@ import TechStack from "../components/astro/TechStack.astro";
 import WhatIDo from "../components/astro/WhatIDo.astro";
 import Heading from "../components/astro/Heading.astro";
 import { FaHouse } from "react-icons/fa6";
+import { sanityClient } from "sanity:client";
+import { GET_MAINCONTENT } from "@/queries";
+
+const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
 ---
 
-<BaseLayout title="About • Vignesh Shanmugavelu">
+<BaseLayout title="About | Vignesh Shanmugavelu">
   <nav
     id="about-nav"
     class="fixed
@@ -44,20 +48,37 @@ import { FaHouse } from "react-icons/fa6";
     </div>
   </nav>
 
-  <div class="lg:m-20">
-    <div class="my-10">
-      <Heading className="text-xl">Work Experience</Heading>
-      <AboutSection expanded={true} />
+  <div class="flex flex-col items-center justify-center">
+    <div class="flex flex-col items-center mb-10">
+      <h1 class="text-center mb-4">
+        <span
+          class="inline-flex flex-wrap items-center justify-center gap-x-2 text-5xl font-bold text-transparent bg-clip-text bg-linear-to-b from-white via-white to-zinc-500 font-space"
+        >
+          Vignesh Shanmugavelu
+          <span class="text-4xl">|</span>
+          <span class="text-xl text-blue-300">
+            Software Development Engineer</span
+          >
+        </span>
+      </h1>
+      <p class="text-center font-mono w-3/4">
+        {mainContent.aboutMe}
+      </p>
     </div>
-    <div class="my-10">
-      <Heading className="text-xl">Tech Stack</Heading>
-      <div class="flex flex-row">
+    <!-- Content -->
+    <div class="flex flex-col lg:w-3/4 gap-10">
+      <div id="work-experience">
+        <Heading className="lg:text-4xl text-center">Work Experience</Heading>
+        <AboutSection expanded={true} />
+      </div>
+      <div id="tech-stack">
+        <Heading className="lg:text-4xl text-center">Tech Stack</Heading>
         <TechStack />
       </div>
-    </div>
-    <div class="my-10">
-      <Heading className="text-xl">What I Do</Heading>
-      <WhatIDo centerContent />
+      <div id="what-i-do">
+        <Heading className="lg:text-4xl text-center">What I Do</Heading>
+        <WhatIDo centerContent />
+      </div>
     </div>
   </div>
 </BaseLayout>

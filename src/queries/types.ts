@@ -65,6 +65,7 @@ export interface ExperienceProject {
 export interface Experience {
   id: string;
   orgName: string;
+  orgSlug: { _type: "slug"; current: "string" };
   description: string;
   role: string;
   logo: SanityImage;

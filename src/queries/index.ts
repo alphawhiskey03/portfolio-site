@@ -41,7 +41,9 @@ export const GET_TECHNOLOGIES = `*[_type=="technology"] | order(category asc){
 export const GET_EXPEREINCES = `*[_type=="experience"] | order(start_date desc){
   "id": _id, 
   "orgName": org_name,
+  "orgSlug": org_slug,
   description,
+
   role,
   logo,
   "orgLink": org_link,

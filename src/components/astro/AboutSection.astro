@@ -1,7 +1,7 @@
 ---
 import { GET_EXPEREINCES } from "@/queries";
 import ExperienceCard from "../vengance-ui/experience-card";
-import { FaExpand } from "react-icons/fa";
+import { FaExpand, FaEye } from "react-icons/fa";
 import { sanityClient } from "sanity:client";
 import type { Experience } from "@/queries/types";
 import { urlFor } from "@/utils";
@@ -26,8 +26,8 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
 
       <div class="flex flex-row justify-between items-center w-full my-8">
         <p class="text-xl font-bold text-white font-mono">Work Experience</p>
-        <button
-          id="expand-btn"
+        <a
+          href="/about#work-experience"
           class="flex 
           items-center 
           gap-2 
@@ -38,9 +38,9 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
           hover:text-white 
           transition-colors"
         >
-          <FaExpand />
-          <span>Expand</span>
-        </button>
+          <FaEye />
+          <span>More details</span>
+        </a>
       </div>
       <ExperienceCard client:load width={600} items={experiences} />
     </div>
@@ -48,20 +48,8 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
     <div class="flex-1 flex flex-col gap-4">
       {experiences.map((exp) => (
         <div
-          class="flex
-             flex-col
-             sm:flex-row
-             w-full
-             items-center
-             gap-5
-             p-6
-             rounded-xl
-             border
-             border-white/10
-             bg-white/5
-             backdrop-blur-md
-             shadow-lg
-             shadow-black/20"
+          id={exp.orgSlug.current}
+          class="flex flex-col sm:flex-row w-full items-center gap-5 p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20"
         >
           <img
             src={urlFor(exp.logo).url()}
@@ -131,13 +119,6 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
 }
 
 <script>
-  import { navigate } from "astro:transitions/client";
-
-  const button = document.getElementById("expand-btn");
-  button?.addEventListener("click", () => {
-    navigate("/about");
-  });
-
   document.addEventListener("click", (event) => {
     const img = (event.target as HTMLElement)?.closest<HTMLImageElement>(
       "img[data-org-link]",
@@ -146,4 +127,31 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
       window.open(img.dataset.orgLink, "_blank");
     }
   });
+
+  function scrollToViewportCenter(el: HTMLElement) {
+    const scroll = () => {
+      const { top, height } = el.getBoundingClientRect();
+      window.scrollTo({
+        top: window.scrollY + top - window.innerHeight / 2 + height / 2,
+        behavior: "smooth",
+      });
+    };
+
+    if (document.readyState === "complete") {
+      requestAnimationFrame(scroll);
+    } else {
+      window.addEventListener("load", () => requestAnimationFrame(scroll), {
+        once: true,
+      });
+    }
+  }
+
+  const highlightedOrg = new URLSearchParams(window.location.search).get("org");
+  if (highlightedOrg) {
+    const el = document.getElementById(highlightedOrg);
+    if (el) {
+      el.classList.replace("border-white/10", "border-blue-300");
+      scrollToViewportCenter(el);
+    }
+  }
 </script>

@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { FaExpand } from "react-icons/fa6";
 import type { Experience } from "@/queries/types";
 import { getFormattedDateAndExperience, urlFor } from "@/utils";
 
@@ -200,9 +201,11 @@ export function ExperienceCard({
               <h3 className="text-xl font-bold text-white line-clamp-1">
                 {activeItem.role}
               </h3>
-              <p className="text-sm text-blue-300 font-light mt-2">
-                {activeItem.orgName}
-              </p>
+              <a href={activeItem.orgLink} target="_blank">
+                <p className="text-sm text-blue-300 font-light mt-2">
+                  {activeItem.orgName}
+                </p>
+              </a>
               <p className="text-xs text-gray-400">
                 {formattedDate} | {duration}
               </p>
@@ -213,50 +216,58 @@ export function ExperienceCard({
           </AnimatePresence>
         </div>
 
-        {/* Navigation Controls */}
-        {showNavigation && items.length > 1 && (
-          <div
-            className="col-start-1 
-               md:col-start-2 
-               md:row-start-3 
-               flex 
-               gap-2  
-               m-auto 
-               -mt-2 
-               md:mt-4  
-               md:m-0 
-               pt-10
-               lg:pt-0
-               "
+        {/* Navigation Controls + Read More */}
+        <div className="col-start-1 md:col-start-2 md:row-start-3 flex items-center justify-between pt-10 lg:pt-0">
+          {showNavigation && items.length > 1 && (
+            <div className="flex gap-2">
+              <button
+                disabled={activeIndex === 0}
+                onClick={handlePrev}
+                className={cn(
+                  "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all cursor-pointer",
+                  activeIndex === 0
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-white/10 hover:border-white/20 hover:scale-105",
+                )}
+                aria-label="Previous card"
+              >
+                <ArrowLeft className="w-4 h-4 text-neutral-300" />
+              </button>
+              <button
+                disabled={activeIndex === items.length - 1}
+                onClick={handleNext}
+                className={cn(
+                  "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all cursor-pointer",
+                  activeIndex === items.length - 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-white/10 hover:border-white/20 hover:scale-105",
+                )}
+                aria-label="Next card"
+              >
+                <ArrowRight className="w-4 h-4 text-neutral-300" />
+              </button>
+            </div>
+          )}
+          <button
+            className="flex 
+          items-center 
+          gap-2 
+          text-sm 
+          text-neutral-400 
+          cursor-pointer 
+          
+          hover:text-white 
+          transition-colors"
+            onClick={() => {
+              window.open(
+                `/about?org=${activeItem.orgSlug.current}#work-experience`,
+              );
+            }}
           >
-            <button
-              disabled={activeIndex === 0}
-              onClick={handlePrev}
-              className={cn(
-                "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all cursor-pointer",
-                activeIndex === 0
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-white/10 hover:border-white/20 hover:scale-105",
-              )}
-              aria-label="Previous card"
-            >
-              <ArrowLeft className="w-4 h-4 text-neutral-300" />
-            </button>
-            <button
-              disabled={activeIndex === items.length - 1}
-              onClick={handleNext}
-              className={cn(
-                "flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all cursor-pointer",
-                activeIndex === items.length - 1
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-white/10 hover:border-white/20 hover:scale-105",
-              )}
-              aria-label="Next card"
-            >
-              <ArrowRight className="w-4 h-4 text-neutral-300" />
-            </button>
-          </div>
-        )}
+            <FaExpand />
+            Expand
+          </button>
+        </div>
       </div>
     </motion.div>
   );
