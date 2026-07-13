@@ -1,28 +1,19 @@
 ---
-import { TypewriterText } from "../jolly-ui/typewritter-text";
 import Links from "../client/Links";
 import { ConnectButton } from "../client/ConnectButton";
 
-const { role } = Astro.props;
+const { role, basedIn } = Astro.props;
+const headerStyle =
+  "text-5xl text-center sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.1] text-transparent bg-clip-text bg-linear-to-b from-white via-white to-zinc-500 drop-shadow-sm";
 ---
 
 <div class="relative h-screen w-full">
   <div class="flex flex-col justify-center items-center gap-4 h-full">
-    <h1
-      class="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.1] text-transparent bg-clip-text bg-linear-to-b from-white via-white to-zinc-500 drop-shadow-sm"
-    >
-      Hello world,
-      <br /> I'm Vignesh!
-    </h1>
-
-    <TypewriterText
-      client:load
-      className="font-mono font-bold text-blue-300"
-      words={[role]}
-    />
-
+    <p class={headerStyle}>Hello World,</p>
+    <h1 class={headerStyle}>Vignesh Shanmugavelu!</h1>
+    <p class="font-mono font-bold text-blue-300">{role}</p>
+    <p class="font-mono text-xs">{basedIn}</p>
     <Links client:load />
-
     <ConnectButton client:load />
   </div>
 </div>

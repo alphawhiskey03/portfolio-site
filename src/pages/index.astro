@@ -21,14 +21,19 @@ const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
     <input type="email" name="email" />
     <textarea name="query"></textarea>
   </form>
-  <Hero role={mainContent.role} />
+
+  <Hero
+    role={mainContent.role}
+    basedIn={`${mainContent.city}, ${mainContent.country}`}
+  />
+
   <SectionWrapper id="about-me" className="lg:items-center">
     <Fragment slot="header">
       <Heading>About Me</Heading>
     </Fragment>
 
     <Fragment slot="content">
-      <AboutSection aboutMe={mainContent.aboutMe} />
+      <AboutSection aboutMe={mainContent.gist} />
     </Fragment>
   </SectionWrapper>
 
@@ -37,7 +42,7 @@ const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
       <Heading>Tech Stack</Heading>
     </Fragment>
     <Fragment slot="content">
-      <TechStack takeFullWidth />
+      <TechStack takeFullWidth description={mainContent.techDescription} />
     </Fragment>
   </SectionWrapper>
 
