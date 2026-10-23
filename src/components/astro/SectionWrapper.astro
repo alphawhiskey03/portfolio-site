@@ -5,12 +5,14 @@ const { className, id, header, content } = Astro.props;
 
 <section
   class={cn(
-    `flex flex-col lg:grid lg:grid-cols-[2fr_3fr] lg:items-center my-8`,
+    `flex flex-col lg:grid lg:grid-cols-[2fr_3fr] lg:items-start my-8`,
     className,
   )}
   id={id}
 >
-  <slot name="header" />
+  <div class="w-full lg:self-start lg:sticky" data-sticky-header>
+    <slot name="header" />
+  </div>
   <div
     class="flex
     w-full
@@ -23,3 +25,23 @@ const { className, id, header, content } = Astro.props;
     <slot name="content" />
   </div>
 </section>
+
+<script>
+  // Pin each section header to the vertical center of the viewport while its
+  // content scrolls. The offset depends on the header's own height, which CSS
+  // alone can't express, so it is measured here and kept in sync on resize.
+  const headers = document.querySelectorAll<HTMLElement>("[data-sticky-header]");
+
+  const center = (el: HTMLElement) => {
+    el.style.top = `max(0px, calc(50vh - ${el.offsetHeight / 2}px))`;
+  };
+
+  const observer = new ResizeObserver((entries) => {
+    for (const entry of entries) center(entry.target as HTMLElement);
+  });
+
+  for (const el of headers) {
+    center(el);
+    observer.observe(el);
+  }
+</script>

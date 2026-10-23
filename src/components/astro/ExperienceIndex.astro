@@ -1,0 +1,58 @@
+---
+import type { Experience } from "@/queries/types";
+
+interface Props {
+  items: Experience[];
+}
+
+const { items } = Astro.props;
+
+const yearRange = (exp: Experience) => {
+  const start = new Date(exp.startDate).getFullYear();
+  if (exp.startDate === exp.endDate) return `${start} – now`;
+  const end = new Date(exp.endDate).getFullYear();
+  return start === end ? `${start}` : `${start} – ${end}`;
+};
+---
+
+<ol
+  class="relative hidden lg:flex flex-col gap-1 mt-2 max-w-sm"
+  aria-label="Roles"
+>
+  <span
+    aria-hidden="true"
+    class="absolute left-4 top-6 bottom-6 w-px bg-white/10"
+  ></span>
+  {
+    items.map((exp) => (
+      <li>
+        <a
+          href={`#${exp.orgSlug.current}`}
+          data-xp-link={exp.orgSlug.current}
+          class="group relative grid grid-cols-[0.625rem_1fr] items-baseline gap-4 rounded-lg px-3 py-2.5
+            text-neutral-500 transition-colors duration-200
+            hover:text-white hover:bg-white/5
+            aria-current:text-white aria-current:bg-white/5"
+        >
+          <span
+            aria-hidden="true"
+            class="relative -top-px h-2.5 w-2.5 rounded-full border border-current bg-background
+              transition-all duration-200
+              group-aria-current:scale-125
+              group-aria-current:border-blue-300
+              group-aria-current:bg-blue-300
+              group-aria-current:shadow-[0_0_12px_rgba(147,197,253,0.6)]"
+          />
+          <span class="min-w-0">
+            <b class="block font-space text-base font-semibold tracking-tight truncate">
+              {exp.orgName}
+            </b>
+            <span class="block font-mono text-xs text-neutral-400 truncate">
+              {exp.role} · {yearRange(exp)}
+            </span>
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ol>

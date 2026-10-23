@@ -10,13 +10,13 @@ export function NeuroNoiseBackground() {
         height: "100%",
         zIndex: -1,
       }}
-      speed={0.4}
-      scale={1.2}
-      colorBack="#050508"
+      speed={0.25}
+      scale={2.2}
+      colorBack="#030306"
       colorMid="#1a3a6e"
-      colorFront="#ffffff"
+      colorFront="#6f8fc9"
       brightness={0.01}
-      contrast={0.5}
+      contrast={0.55}
     />
   );
 }

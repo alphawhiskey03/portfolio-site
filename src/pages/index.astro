@@ -6,13 +6,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TechStack from "../components/astro/TechStack.astro";
 import WhatIDo from "../components/astro/WhatIDo.astro";
 import Hero from "../components/astro/Hero.astro";
+import Experience from "../components/astro/Experience.astro";
+import ExperienceIndex from "../components/astro/ExperienceIndex.astro";
 
 import ContactForm from "../components/client/ContactForm";
 import Links from "../components/client/Links";
 import { sanityClient } from "sanity:client";
-import { GET_MAINCONTENT } from "@/queries";
+import { GET_MAINCONTENT, GET_EXPEREINCES } from "@/queries";
+import type { Experience as ExperienceItem } from "@/queries/types";
 
 const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
+const experiences: ExperienceItem[] = await sanityClient.fetch(GET_EXPEREINCES);
 ---
 
 <BaseLayout>
@@ -27,13 +31,27 @@ const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
     basedIn={`${mainContent.city}, ${mainContent.country}`}
   />
 
-  <SectionWrapper id="about-me" className="lg:items-center">
+  <SectionWrapper id="about-me">
     <Fragment slot="header">
       <Heading>About Me</Heading>
     </Fragment>
 
     <Fragment slot="content">
-      <AboutSection aboutMe={mainContent.gist} />
+      <AboutSection
+        aboutMe={mainContent.gist}
+        email={mainContent.email}
+        currently="building product features at Userflow x Beamer"
+      />
+    </Fragment>
+  </SectionWrapper>
+
+  <SectionWrapper id="experience">
+    <Fragment slot="header">
+      <Heading>Experience</Heading>
+      <ExperienceIndex items={experiences} />
+    </Fragment>
+    <Fragment slot="content">
+      <Experience items={experiences} />
     </Fragment>
   </SectionWrapper>
 

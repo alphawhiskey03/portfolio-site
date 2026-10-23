@@ -1,0 +1,236 @@
+---
+import type { Experience } from "@/queries/types";
+import { getFormattedDateAndExperience, urlFor } from "@/utils";
+import IconComponent from "../client/IconComponent";
+
+interface Props {
+  items: Experience[];
+  /** Always use the rail + date-label layout (otherwise only below lg) */
+  timeline?: boolean;
+}
+
+const { items, timeline = false } = Astro.props;
+
+// Classes that switch the layout at lg; dropped when `timeline` is forced.
+const atLg = (classes: string) => (timeline ? "" : classes);
+
+const monthYear = (date: string) =>
+  new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+
+/** "Feb 2024 – now" or "Nov 2023 – Feb 2024" */
+const dateRange = (exp: Experience) =>
+  `${monthYear(exp.startDate)} – ${
+    exp.startDate === exp.endDate ? "now" : monthYear(exp.endDate)
+  }`;
+---
+
+<div class:list={["relative flex flex-col gap-6 w-full pl-7", atLg("lg:pl-0")]}>
+  <!-- Mobile only: light-beam rail running down the left of the cards -->
+  <span aria-hidden="true" class:list={["absolute left-1.5 top-0 bottom-0", atLg("lg:hidden")]}>
+    <span
+      class="absolute inset-y-0 -left-px w-0.75 blur-[2px] bg-linear-to-b from-transparent via-blue-300/60 to-transparent"
+    ></span>
+    <span
+      class="absolute inset-y-0 left-0 w-px bg-linear-to-b from-transparent via-blue-100 to-transparent"
+    ></span>
+  </span>
+  {
+    items.map((exp) => {
+      const { formattedDate, duration } = getFormattedDateAndExperience(
+        exp.startDate,
+        exp.endDate,
+      );
+      return (
+        <article
+          id={exp.orgSlug.current}
+          data-xp-job={exp.orgSlug.current}
+          class:list={[
+            "group relative mt-10 scroll-mt-32 rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur-md shadow-lg shadow-black/20 transition-colors duration-300 data-[on=true]:border-white/20",
+            atLg("lg:mt-0"),
+          ]}
+        >
+          <span
+            aria-hidden="true"
+            class:list={[
+              "absolute -left-6.75 -top-8.75 h-2.5 w-2.5 rounded-full border border-blue-300/60 bg-background transition-all duration-300 group-data-[on=true]:scale-125 group-data-[on=true]:border-blue-300 group-data-[on=true]:bg-blue-300 group-data-[on=true]:shadow-[0_0_12px_rgba(147,197,253,0.7)]",
+              atLg("lg:hidden"),
+            ]}
+          />
+          <p
+            class:list={[
+              "absolute -top-10 left-3 font-mono text-sm leading-5 text-blue-300",
+              atLg("lg:hidden"),
+            ]}
+          >
+            {dateRange(exp)}
+          </p>
+          <p class:list={["hidden flex-wrap items-baseline gap-x-2 font-mono text-xs text-neutral-400", atLg("lg:flex")]}>
+            <b class="font-medium text-neutral-200">{formattedDate}</b>
+            <span aria-hidden="true">·</span>
+            <span>{duration}</span>
+          </p>
+
+          <div class:list={["flex items-center gap-3", atLg("lg:mt-3")]}>
+            <a
+              href={exp.orgLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shrink-0"
+              aria-label={exp.orgName}
+            >
+              <img
+                src={urlFor(exp.logo).width(80).height(80).url()}
+                alt=""
+                width="40"
+                height="40"
+                loading="lazy"
+                class="h-10 w-10 rounded-full border border-white/10 object-cover"
+              />
+            </a>
+            <h3 class="font-space text-lg sm:text-xl font-bold tracking-tight text-white">
+              {exp.role}{" "}
+              <a
+                href={exp.orgLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block font-normal text-neutral-400 transition-colors hover:text-blue-300"
+              >
+                — {exp.orgName}
+              </a>
+            </h3>
+          </div>
+
+          <p class="mt-3 leading-relaxed text-neutral-300">{exp.description}</p>
+
+          {exp.projects?.length ? (
+            <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs">
+              <span class="text-neutral-500">Products</span>
+              {exp.projects.map((project) =>
+                project.link ? (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-300 hover:underline"
+                  >
+                    {project.title}
+                  </a>
+                ) : (
+                  <span class="text-neutral-300">{project.title}</span>
+                ),
+              )}
+            </div>
+          ) : null}
+
+          {exp.technologies?.length ? (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {exp.technologies.map((tech) => (
+                <div class="group flex items-center gap-2 rounded-md border border-white/10 p-2 font-mono text-xs transition-colors hover:border-blue-300">
+                  {tech.icon && (
+                    <span class="group-hover:text-blue-300">
+                      <IconComponent
+                        packageName={tech.icon.packageName}
+                        icon={tech.icon.name}
+                        iconProps={{}}
+                      />
+                    </span>
+                  )}
+                  <span>{tech.title}</span>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </article>
+      );
+    })
+  }
+</div>
+
+<script>
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-xp-link]"),
+  );
+  const jobs = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-xp-job]"),
+  );
+
+  function setActive(slug: string) {
+    for (const link of links) {
+      if (link.dataset.xpLink === slug)
+        link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    }
+    for (const job of jobs) {
+      job.dataset.on = job.dataset.xpJob === slug ? "true" : "false";
+    }
+  }
+
+  // Scroll spy: the card crossing a line ~35% down the viewport is active.
+  let ticking = false;
+  function update() {
+    ticking = false;
+    if (!jobs.length) return;
+    const line = window.innerHeight * 0.35;
+    let best = jobs[0];
+    let bestDist = Infinity;
+    for (const job of jobs) {
+      const { top, bottom } = job.getBoundingClientRect();
+      const dist =
+        top <= line && bottom >= line
+          ? 0
+          : Math.min(Math.abs(top - line), Math.abs(bottom - line));
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = job;
+      }
+    }
+    setActive(best.dataset.xpJob ?? "");
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  if (jobs.length) {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  }
+
+  for (const link of links) {
+    link.addEventListener("click", (event) => {
+      const slug = link.dataset.xpLink ?? "";
+      const target = document.getElementById(slug);
+      if (!target) return;
+      event.preventDefault();
+      setActive(slug);
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", `#${slug}`);
+    });
+  }
+
+  // Legacy deep links: /about?org=<slug> highlights and centers that card.
+  const highlightedOrg = new URLSearchParams(window.location.search).get("org");
+  if (highlightedOrg) {
+    const el = document.getElementById(highlightedOrg);
+    if (el) {
+      el.classList.replace("border-white/10", "border-blue-300");
+      const scroll = () => {
+        const { top, height } = el.getBoundingClientRect();
+        window.scrollTo({
+          top: window.scrollY + top - window.innerHeight / 2 + height / 2,
+          behavior: "smooth",
+        });
+      };
+      if (document.readyState === "complete") requestAnimationFrame(scroll);
+      else
+        window.addEventListener("load", () => requestAnimationFrame(scroll), {
+          once: true,
+        });
+    }
+  }
+</script>

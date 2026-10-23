@@ -26,3 +26,5 @@ pnpm-debug.log*
 
 #graphify output
 /graphify-out
+
+.mcp.json
