@@ -1,6 +1,7 @@
 ---
 import type { Experience } from "@/queries/types";
 import { getFormattedDateAndExperience, urlFor } from "@/utils";
+import { PortableText } from "astro-portabletext";
 import IconComponent from "../client/IconComponent";
 
 interface Props {
@@ -103,7 +104,11 @@ const dateRange = (exp: Experience) =>
             </h3>
           </div>
 
-          <p class="mt-3 leading-relaxed text-neutral-300">{exp.description}</p>
+          {exp.body?.length ? (
+            <div class="mt-3 space-y-3 leading-relaxed text-neutral-300">
+              <PortableText value={exp.body} />
+            </div>
+          ) : null}
 
           {exp.projects?.length ? (
             <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs">

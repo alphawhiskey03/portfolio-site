@@ -5,6 +5,7 @@ import { FaExpand, FaEye } from "react-icons/fa";
 import { sanityClient } from "sanity:client";
 import type { Experience } from "@/queries/types";
 import { urlFor } from "@/utils";
+import { PortableText } from "astro-portabletext";
 import IconComponent from "../client/IconComponent";
 
 interface Props {
@@ -85,9 +86,9 @@ const experiences: Experience[] = await sanityClient.fetch(GET_EXPERIENCES);
             >
               {exp.orgName}
             </a>
-            <p class="text-neutral-300 mt-1 leading-snug text-start">
-              {exp.description}
-            </p>
+            <div class="text-neutral-300 mt-1 leading-snug text-start space-y-2">
+              <PortableText value={exp.body} />
+            </div>
             <div class="flex flex-row gap-2 mt-2 flex-wrap">
               {exp.technologies.map((tech) => (
                 <div

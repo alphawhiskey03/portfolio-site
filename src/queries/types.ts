@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from "@portabletext/types";
+
 export interface SanityImage {
   _type: "image";
   asset: {
@@ -66,7 +68,7 @@ export interface Experience {
   id: string;
   orgName: string;
   orgSlug: { _type: "slug"; current: "string" };
-  description: string;
+  body: PortableTextBlock[];
   role: string;
   logo: SanityImage;
   orgLink?: string;

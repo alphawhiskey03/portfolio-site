@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FaExpand } from "react-icons/fa6";
 import type { Experience } from "@/queries/types";
 import { getFormattedDateAndExperience, urlFor } from "@/utils";
+import { toPlainText } from "@portabletext/toolkit";
 
 interface ExperienceCardProps {
   /** Array of testimonial items to display */
@@ -210,7 +211,7 @@ export function ExperienceCard({
                 {formattedDate} | {duration}
               </p>
               <p className="text-sm text-white mt-1 line-clamp-7">
-                {activeItem.description}
+                {toPlainText(activeItem.body ?? [])}
               </p>
             </motion.div>
           </AnimatePresence>

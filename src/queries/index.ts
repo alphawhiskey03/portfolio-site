@@ -42,7 +42,7 @@ export const GET_EXPERIENCES = `*[_type=="experience"] | order(start_date desc){
   "id": _id, 
   "orgName": org_name,
   "orgSlug": org_slug,
-  description,
+  body,
 
   role,
   logo,
