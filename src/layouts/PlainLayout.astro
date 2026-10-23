@@ -1,6 +1,10 @@
 ---
 import "../styles/global.css";
 import Link from "../components/astro/Link.astro";
+interface Props {
+  title?: string;
+}
+
 const { title = "Hi there" } = Astro.props;
 ---
 
@@ -25,10 +29,10 @@ const { title = "Hi there" } = Astro.props;
         <slot />
       </div>
     </main>
+    <footer>
+      <div class="text-center">
+        <Link href="https://therealvig.netlify.app"> © therealvig </Link>
+      </div>
+    </footer>
   </body>
-  <footer>
-    <div class="text-center">
-      <Link href="https://therealvig.netlify.app"> © therealvig </Link>
-    </div>
-  </footer>
 </html>

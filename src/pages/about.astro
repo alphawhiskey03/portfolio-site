@@ -7,11 +7,16 @@ import WhatIDo from "../components/astro/WhatIDo.astro";
 import Heading from "../components/astro/Heading.astro";
 import { FaHouse } from "react-icons/fa6";
 import { sanityClient } from "sanity:client";
-import { GET_MAINCONTENT, GET_EXPEREINCES } from "@/queries";
-import type { Experience as ExperienceItem } from "@/queries/types";
+import { GET_MAINCONTENT, GET_EXPERIENCES } from "@/queries";
+import type {
+  MainContentResponse,
+  ExperiencesResponse,
+} from "@/queries/types";
 
-const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
-const experiences: ExperienceItem[] = await sanityClient.fetch(GET_EXPEREINCES);
+const mainContent =
+  await sanityClient.fetch<MainContentResponse>(GET_MAINCONTENT);
+const experiences =
+  await sanityClient.fetch<ExperiencesResponse>(GET_EXPERIENCES);
 ---
 
 <BaseLayout title="About | Vignesh Shanmugavelu">

@@ -37,7 +37,7 @@ const TypeToIcon: Record<
   [LinkType.PORTFOLIO]: {
     icon: BsGlobe,
     text: "Portfolio",
-    href: "https://therealvig.netlify.app",
+    href: "https://therealvig.com",
   },
   [LinkType.SPOTIFY]: {
     icon: BsSpotify,

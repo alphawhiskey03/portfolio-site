@@ -1,6 +1,12 @@
 ---
 import { cn } from "@/lib/utils";
-const { className, id, header, content } = Astro.props;
+
+interface Props {
+  id?: string;
+  className?: string;
+}
+
+const { className, id } = Astro.props;
 ---
 
 <section

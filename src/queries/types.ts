@@ -87,18 +87,10 @@ export interface SocialMedia {
   };
 }
 
-/**
- * Update this once you share the timeline schema/query fields.
- */
-export interface Timeline {
-  [key: string]: unknown;
-}
-
 // Query Result Types
 
 export type MainContentResponse = MainContent;
 export type ProjectsResponse = Project[];
 export type TechnologiesResponse = Technology[];
 export type ExperiencesResponse = Experience[];
-export type TimelineResponse = Timeline[];
 export type SocialMediaResponse = SocialMedia[];

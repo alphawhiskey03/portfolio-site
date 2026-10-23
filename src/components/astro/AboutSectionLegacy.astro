@@ -1,5 +1,5 @@
 ---
-import { GET_EXPEREINCES } from "@/queries";
+import { GET_EXPERIENCES } from "@/queries";
 import ExperienceCard from "../vengance-ui/experience-card";
 import { FaExpand, FaEye } from "react-icons/fa";
 import { sanityClient } from "sanity:client";
@@ -7,8 +7,13 @@ import type { Experience } from "@/queries/types";
 import { urlFor } from "@/utils";
 import IconComponent from "../client/IconComponent";
 
+interface Props {
+  expanded?: boolean;
+  aboutMe?: string;
+}
+
 const { expanded = false, aboutMe } = Astro.props;
-const experiences: Experience[] = await sanityClient.fetch(GET_EXPEREINCES);
+const experiences: Experience[] = await sanityClient.fetch(GET_EXPERIENCES);
 ---
 
 {

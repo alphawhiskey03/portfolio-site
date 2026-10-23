@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import Link from "../components/astro/Link.astro";
 import { NeuroNoiseBackground } from "../components/client/NeuroNoiseBackground";
 
 interface Props {
@@ -81,16 +80,97 @@ const personSchema = {
     />
   </head>
   <body>
-    <NeuroNoiseBackground client:load />
+    <NeuroNoiseBackground client:idle />
     <main class="w-full min-h-screen">
       <div class="p-6 lg:p-10">
         <slot />
       </div>
     </main>
-    <footer>
-      <div class="text-center pb-6">
-        <Link href="https://therealvig.netlify.app"> © therealvig </Link>
-      </div>
+    <footer class="px-6 pb-10 pt-28 lg:px-10 lg:pt-40">
+      <p
+        class="max-w-3xl font-space text-2xl font-medium leading-tight tracking-tight text-white lg:text-4xl"
+      >
+        Thanks for scrolling
+        <span data-scroll-count class="tabular-nums text-blue-300" hidden
+        ></span>
+        all the way down.
+      </p>
+      <p class="mt-6 text-base text-neutral-400">
+        made with
+        <a
+          href="https://astro.build"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-neutral-200 transition-colors hover:text-blue-300"
+          >Astro</a
+        >,
+        <a
+          href="https://tailwindcss.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-neutral-200 transition-colors hover:text-blue-300"
+          >Tailwind</a
+        >
+        &amp;
+        <a
+          href="https://www.sanity.io"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-neutral-200 transition-colors hover:text-blue-300"
+          >Sanity CMS</a
+        >
+      </p>
+      <p class="mt-1 text-base text-neutral-400">
+        © {new Date().getFullYear()} therealvig
+      </p>
     </footer>
+
+    <script>
+      // "Thanks for scrolling N px all the way down": N is the visitor's real
+      // scroll distance when the footer enters, counted up once. Without JS the
+      // line simply reads "all the way down".
+      const counter = document.querySelector<HTMLElement>(
+        "[data-scroll-count]",
+      );
+      const footer = counter?.closest("footer");
+
+      if (counter && footer) {
+        const reduceMotion = matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        const format = (n: number) =>
+          `${Math.round(n).toLocaleString("en-US")} px`;
+
+        const reveal = () => {
+          const target = Math.round(window.scrollY);
+          if (target < 100) return; // short page: keep the plain line
+          counter.hidden = false;
+          if (reduceMotion) {
+            counter.textContent = format(target);
+            return;
+          }
+          const duration = 1400;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            counter.textContent = format(target * eased);
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+              observer.disconnect();
+              reveal();
+            }
+          },
+          { threshold: 0.4 },
+        );
+        observer.observe(footer);
+      }
+    </script>
   </body>
 </html>

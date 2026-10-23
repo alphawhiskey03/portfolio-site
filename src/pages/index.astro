@@ -12,11 +12,16 @@ import ExperienceIndex from "../components/astro/ExperienceIndex.astro";
 import ContactForm from "../components/client/ContactForm";
 import Links from "../components/client/Links";
 import { sanityClient } from "sanity:client";
-import { GET_MAINCONTENT, GET_EXPEREINCES } from "@/queries";
-import type { Experience as ExperienceItem } from "@/queries/types";
+import { GET_MAINCONTENT, GET_EXPERIENCES } from "@/queries";
+import type {
+  MainContentResponse,
+  ExperiencesResponse,
+} from "@/queries/types";
 
-const mainContent = await sanityClient.fetch(GET_MAINCONTENT);
-const experiences: ExperienceItem[] = await sanityClient.fetch(GET_EXPEREINCES);
+const mainContent =
+  await sanityClient.fetch<MainContentResponse>(GET_MAINCONTENT);
+const experiences =
+  await sanityClient.fetch<ExperiencesResponse>(GET_EXPERIENCES);
 ---
 
 <BaseLayout>
@@ -60,7 +65,7 @@ const experiences: ExperienceItem[] = await sanityClient.fetch(GET_EXPEREINCES);
       <Heading>Tech Stack</Heading>
     </Fragment>
     <Fragment slot="content">
-      <TechStack takeFullWidth description={mainContent.techDescription} />
+      <TechStack takeFullWidth />
     </Fragment>
   </SectionWrapper>
 
@@ -77,24 +82,32 @@ const experiences: ExperienceItem[] = await sanityClient.fetch(GET_EXPEREINCES);
     <Fragment slot="header">
       <div class="flex flex-col">
         <Heading>Contact</Heading>
-        <div class="flex flex-col gap-4 items-center mb-8 lg:items-start">
-          <Links client:load />
+        <div
+          class="flex flex-col gap-5 items-center text-center mb-8 lg:items-start lg:text-left"
+        >
           <a
             href="mailto:vigneshshanmugavelu03@gmail.com"
-            class="text-mono text-gray-200">vigneshshanmugavelu03@gmail.com</a
+            class="group font-space text-base font-medium tracking-tight text-white [overflow-wrap:anywhere] sm:text-lg lg:text-xl"
           >
+            <span
+              class="text-blue-300 transition-colors group-hover:text-blue-200"
+              >vigneshshanmugavelu03</span
+            >@gmail.com
+          </a>
           <a
             href="https://maps.app.goo.gl/L91iPn9L8ZRcjhq79"
             target="_blank"
             rel="noopener noreferrer"
-            class="font-mono text-sm">Coimbatore, India</a
+            class="text-base text-neutral-400 transition-colors hover:text-white"
+            >Coimbatore, India</a
           >
+          <Links client:load viewMode="icon" />
         </div>
       </div>
     </Fragment>
 
     <Fragment slot="content">
-      <ContactForm client:load />
+      <ContactForm client:visible />
     </Fragment>
   </SectionWrapper>
 </BaseLayout>

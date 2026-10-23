@@ -1,4 +1,7 @@
-import { createImageUrlBuilder } from "@sanity/image-url";
+import {
+  createImageUrlBuilder,
+  type SanityImageSource,
+} from "@sanity/image-url";
 
 const CONFIG = {
   projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
@@ -23,7 +26,7 @@ export const calculateExperience = (startDate: Date, endDate: Date): string => {
   return exp;
 };
 
-export const urlFor = (source: any) =>
+export const urlFor = (source: SanityImageSource) =>
   createImageUrlBuilder(CONFIG).image(source);
 
 export const getFormattedDateAndExperience = (

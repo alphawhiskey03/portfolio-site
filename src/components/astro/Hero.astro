@@ -2,6 +2,11 @@
 import Links from "../client/Links";
 import { ConnectButton } from "../client/ConnectButton";
 
+interface Props {
+  role: string;
+  basedIn: string;
+}
+
 const { role, basedIn } = Astro.props;
 const headerStyle =
   "text-5xl text-center sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.1] text-transparent bg-clip-text bg-linear-to-b from-white via-white to-zinc-500 drop-shadow-sm";

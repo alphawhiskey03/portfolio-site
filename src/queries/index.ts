@@ -38,7 +38,7 @@ export const GET_TECHNOLOGIES = `*[_type=="technology"] | order(category asc){
   }
 }`;
 
-export const GET_EXPEREINCES = `*[_type=="experience"] | order(start_date desc){
+export const GET_EXPERIENCES = `*[_type=="experience"] | order(start_date desc){
   "id": _id, 
   "orgName": org_name,
   "orgSlug": org_slug,
@@ -64,8 +64,6 @@ export const GET_EXPEREINCES = `*[_type=="experience"] | order(start_date desc){
     link
   }
 } `;
-
-export const GET_TIMELINE = `*[_type=="timeline"] | order(year asc)`;
 
 export const GET_SOCIALMEDIA = `*[_type=="social-media"] | order(order asc) {
   title,
