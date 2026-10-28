@@ -3,13 +3,7 @@ import { NeuroNoise } from "@paper-design/shaders-react";
 export function NeuroNoiseBackground() {
   return (
     <NeuroNoise
-      style={{
-        position: "fixed",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        zIndex: -1,
-      }}
+      className="fixed inset-0 -z-10 h-full w-full"
       speed={0.25}
       scale={2.2}
       colorBack="#030306"

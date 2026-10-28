@@ -141,58 +141,6 @@
 }
 
 
-/* StackedLogos - CSS Variables & Animations */
-.stacked-logos {
-  --duration: 30;
-  --items: 4;
-  --lists: 4;
-  --stagger: 0;
-  --logo-width: 200px;
-  --mouse-x: 0px;
-  --mouse-y: 0px;
-  }
-  
-  .stacked-logos:hover .stacked-logos__glow {
-  opacity: 1;
-  }
-  
-  .stacked-logos:hover .stacked-logos__border-glow {
-  opacity: 1;
-  }
-  
-  .stacked-logos__cell {
-  --base-delay: calc(sin((var(--index) / var(--lists)) * 45deg) * var(--stagger));
-  }
-  
-  .stacked-logos__logo {
-  animation-name: stacked-logos-appear;
-  animation-duration: calc(var(--duration) * 1s);
-  animation-fill-mode: both;
-  animation-iteration-count: infinite;
-  animation-delay: calc(
-    (var(--duration) / var(--items)) * (var(--items) - var(--i)) * -1s +
-    (var(--base-delay, 0) * 1s)
-  );
-  }
-  
-  @keyframes stacked-logos-appear {
-  0%, 100% { opacity: 0; filter: blur(4px); }
-  5%, 20% { opacity: 1; filter: blur(0); }
-  25%, 100% { opacity: 0; filter: blur(4px); }
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-  .stacked-logos__logo {
-    animation: none;
-    opacity: 1;
-    filter: none;
-  }
-  .stacked-logos__item:not(:first-child) {
-    display: none;
-  }
-
-  }
-
 @keyframes shimmer {
     0% {
       background-position: -200% 0;

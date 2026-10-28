@@ -1,0 +1,9 @@
+---
+import type { MarkProps } from "astro-portabletext/types";
+
+export type Props = MarkProps;
+
+const { node, index, isInline, ...attrs } = Astro.props;
+---
+
+<strong class="font-medium text-neutral-100" {...attrs}><slot /></strong>

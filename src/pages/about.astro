@@ -7,16 +7,18 @@ import WhatIDo from "../components/astro/WhatIDo.astro";
 import Heading from "../components/astro/Heading.astro";
 import { FaHouse } from "react-icons/fa6";
 import { sanityClient } from "sanity:client";
-import { GET_MAINCONTENT, GET_EXPERIENCES } from "@/queries";
+import { GET_MAINCONTENT, GET_EXPERIENCES, GET_SOCIALMEDIA } from "@/queries";
 import type {
   MainContentResponse,
   ExperiencesResponse,
+  SocialMediaResponse,
 } from "@/queries/types";
 
 const mainContent =
   await sanityClient.fetch<MainContentResponse>(GET_MAINCONTENT);
 const experiences =
   await sanityClient.fetch<ExperiencesResponse>(GET_EXPERIENCES);
+const socials = await sanityClient.fetch<SocialMediaResponse>(GET_SOCIALMEDIA);
 ---
 
 <BaseLayout title="About | Vignesh Shanmugavelu">
@@ -65,6 +67,7 @@ const experiences =
         currently="building product features at Userflow x Beamer"
         aboutMe={mainContent.aboutMe}
         email={mainContent.email}
+        socials={socials}
       />
       <div id="work-experience">
         <Heading className="lg:text-4xl text-center">Work Experience</Heading>

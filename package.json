@@ -19,6 +19,7 @@
     "@paper-design/shaders-react": "^0.0.72",
     "@portabletext/toolkit": "^6.0.0",
     "@portabletext/types": "^4.0.2",
+    "@react-pdf/renderer": "^4.9.0",
     "@sanity/astro": "^3.4.1",
     "@sanity/client": "^7.23.0",
     "@sanity/image-url": "^2.1.1",

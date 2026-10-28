@@ -1,30 +1,27 @@
 ---
 import { ResumeButton } from "../client/ResumeButton";
+import { prettyUrl } from "@/utils";
+import type { SocialMedia } from "@/queries/types";
 
 interface Props {
   aboutMe: string;
   email: string;
+  /** Sanity social-media docs; only those flagged `main` are listed */
+  socials: SocialMedia[];
   currently: string;
-  /** Optional header; used on /about where this card is the page intro */
   name?: string;
   role?: string;
 }
 
-const { aboutMe, email, currently, name, role } = Astro.props;
+const { aboutMe, email, socials, currently, name, role } = Astro.props;
 
 const RESUME_PATH = "/resume.pdf";
 
 const contacts = [
   { label: email, href: `mailto:${email}` },
-  {
-    label: "linkedin.com/in/vignesh-s-802812183",
-    href: "https://www.linkedin.com/in/vignesh-s-802812183/",
-  },
-  {
-    label: "github.com/alphawhiskey03",
-    href: "https://github.com/alphawhiskey03",
-  },
-  { label: "therealvig.app", href: "https://therealvig.app" },
+  ...socials
+    .filter((social) => social.main)
+    .map((social) => ({ label: prettyUrl(social.link), href: social.link })),
 ];
 ---
 
@@ -94,7 +91,7 @@ const contacts = [
       }
     </ul>
 
-    <div class="shrink-0 self-start sm:self-auto">
+    <div class="shrink-0 self-center sm:self-auto">
       <ResumeButton client:visible href={RESUME_PATH} />
     </div>
   </div>

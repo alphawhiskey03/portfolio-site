@@ -2,7 +2,13 @@
 import type { Experience } from "@/queries/types";
 import { getFormattedDateAndExperience, urlFor } from "@/utils";
 import { PortableText } from "astro-portabletext";
+import type { SomePortableTextComponents } from "astro-portabletext/types";
+import Paragraph from "../portable-text/Paragraph.astro";
+import Strong from "../portable-text/Strong.astro";
+import BulletList from "../portable-text/BulletList.astro";
+import BulletItem from "../portable-text/BulletItem.astro";
 import IconComponent from "../client/IconComponent";
+import { LuChevronDown } from "react-icons/lu";
 
 interface Props {
   items: Experience[];
@@ -11,6 +17,14 @@ interface Props {
 }
 
 const { items, timeline = false } = Astro.props;
+
+/** How experience bodies from Sanity render; styling lives in these components. */
+const bodyComponents: SomePortableTextComponents = {
+  block: { normal: Paragraph },
+  list: { bullet: BulletList },
+  listItem: { bullet: BulletItem },
+  mark: { strong: Strong },
+};
 
 // Classes that switch the layout at lg; dropped when `timeline` is forced.
 const atLg = (classes: string) => (timeline ? "" : classes);
@@ -68,13 +82,36 @@ const dateRange = (exp: Experience) =>
           >
             {dateRange(exp)}
           </p>
+          {exp.body?.length ? (
+            <button
+              type="button"
+              data-xp-toggle
+              aria-expanded="true"
+              aria-controls={`${exp.orgSlug.current}-body`}
+              class="group/toggle absolute -top-11 right-0 flex items-center gap-1 rounded-md border border-white/10 bg-background/60 py-1.5 pl-2.5 pr-1.5 font-mono text-xs text-neutral-300 backdrop-blur-sm
+                transition-colors duration-300
+                hover:border-blue-300 hover:text-white active:scale-95
+                aria-expanded:border-blue-300/60 aria-expanded:text-blue-300
+                lg:hidden"
+            >
+              <span class="group-aria-expanded/toggle:hidden">Details</span>
+              <span class="hidden group-aria-expanded/toggle:inline">Hide</span>
+              <LuChevronDown
+                size={16}
+                className="transition-transform duration-300 group-aria-expanded/toggle:rotate-180"
+              />
+            </button>
+          ) : null}
           <p class:list={["hidden flex-wrap items-baseline gap-x-2 font-mono text-xs text-neutral-400", atLg("lg:flex")]}>
             <b class="font-medium text-neutral-200">{formattedDate}</b>
             <span aria-hidden="true">·</span>
             <span>{duration}</span>
           </p>
 
-          <div class:list={["flex items-center gap-3", atLg("lg:mt-3")]}>
+          <div
+            data-xp-head
+            class:list={["flex items-center gap-3 max-lg:cursor-pointer", atLg("lg:mt-3")]}
+          >
             <a
               href={exp.orgLink}
               target="_blank"
@@ -105,8 +142,15 @@ const dateRange = (exp: Experience) =>
           </div>
 
           {exp.body?.length ? (
-            <div class="mt-3 space-y-3 leading-relaxed text-neutral-300">
-              <PortableText value={exp.body} />
+            <div
+              id={`${exp.orgSlug.current}-body`}
+              data-xp-body
+              class="mt-3 space-y-3 leading-relaxed text-neutral-300
+                max-lg:overflow-hidden max-lg:transition-[max-height] max-lg:duration-300 max-lg:ease-[cubic-bezier(0.22,1,0.36,1)]
+                max-lg:data-[collapsed=true]:max-h-[3.6rem] max-lg:data-[collapsed=true]:mask-b-from-30%
+                motion-reduce:transition-none"
+            >
+              <PortableText value={exp.body} components={bodyComponents} />
             </div>
           ) : null}
 
@@ -213,9 +257,87 @@ const dateRange = (exp: Experience) =>
       if (!target) return;
       event.preventDefault();
       setActive(slug);
+      if (collapsible.matches) openOnly(target);
       target.scrollIntoView({ behavior: "smooth", block: "start" });
       history.replaceState(null, "", `#${slug}`);
     });
+  }
+
+  // Phones: each card body collapses to a peek; one open at a time, the
+  // current role open by default. Without this script every card stays open.
+  // Same breakpoint as the `max-lg:` utilities, read from Tailwind's theme token.
+  const lg = getComputedStyle(document.documentElement)
+    .getPropertyValue("--breakpoint-lg")
+    .trim() || "64rem";
+  const collapsible = window.matchMedia(`(width < ${lg})`);
+
+  function setOpen(article: HTMLElement, open: boolean) {
+    const body = article.querySelector<HTMLElement>("[data-xp-body]");
+    const toggle = article.querySelector<HTMLElement>("[data-xp-toggle]");
+    if (!body || !toggle) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    if (open) {
+      body.style.maxHeight = `${body.scrollHeight}px`;
+      body.dataset.collapsed = "false";
+      body.addEventListener(
+        "transitionend",
+        () => {
+          body.style.maxHeight = "";
+        },
+        { once: true },
+      );
+    } else {
+      body.style.maxHeight = `${body.scrollHeight}px`;
+      void body.offsetHeight; // commit the start height before collapsing
+      body.dataset.collapsed = "true";
+      body.style.maxHeight = "";
+    }
+  }
+
+  function isOpen(article: HTMLElement) {
+    return (
+      article.querySelector("[data-xp-toggle]")?.getAttribute("aria-expanded") ===
+      "true"
+    );
+  }
+
+  function openOnly(target: HTMLElement) {
+    for (const job of jobs) {
+      if (job === target) setOpen(job, true);
+      else if (isOpen(job)) setOpen(job, false);
+    }
+  }
+
+  if (collapsible.matches && jobs.length) {
+    const hashed = jobs.find((job) => `#${job.id}` === window.location.hash);
+    const initial = hashed ?? jobs[0];
+    for (const job of jobs) {
+      if (job === initial) continue;
+      const body = job.querySelector<HTMLElement>("[data-xp-body]");
+      const toggle = job.querySelector<HTMLElement>("[data-xp-toggle]");
+      if (body && toggle) {
+        body.dataset.collapsed = "true";
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    }
+  }
+
+  for (const job of jobs) {
+    const toggleJob = () => {
+      if (!collapsible.matches) return;
+      if (isOpen(job)) setOpen(job, false);
+      else openOnly(job);
+    };
+    job
+      .querySelector<HTMLElement>("[data-xp-toggle]")
+      ?.addEventListener("click", toggleJob);
+    job
+      .querySelector<HTMLElement>("[data-xp-head]")
+      ?.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        if (target.closest("a") || target.closest("[data-xp-toggle]")) return;
+        toggleJob();
+      });
   }
 
   // Legacy deep links: /about?org=<slug> highlights and centers that card.

@@ -1,0 +1,14 @@
+---
+import type { ListItemProps } from "astro-portabletext/types";
+
+export type Props = ListItemProps;
+
+const { node, index, isInline, ...attrs } = Astro.props;
+---
+
+<li
+  class="relative pl-5 before:absolute before:left-0 before:top-[0.65em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-blue-300/80 before:content-['']"
+  {...attrs}
+>
+  <slot />
+</li>

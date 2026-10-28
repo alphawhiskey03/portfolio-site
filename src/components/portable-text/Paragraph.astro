@@ -1,0 +1,9 @@
+---
+import type { BlockProps } from "astro-portabletext/types";
+
+export type Props = BlockProps;
+
+const { node, index, isInline, ...attrs } = Astro.props;
+---
+
+<p class="text-sm leading-relaxed text-neutral-400" {...attrs}><slot /></p>

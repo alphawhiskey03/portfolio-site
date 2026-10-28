@@ -1,0 +1,9 @@
+---
+import type { ListProps } from "astro-portabletext/types";
+
+export type Props = ListProps;
+
+const { node, index, isInline, ...attrs } = Astro.props;
+---
+
+<ul class="space-y-2" {...attrs}><slot /></ul>

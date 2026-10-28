@@ -12,19 +12,27 @@ import ExperienceIndex from "../components/astro/ExperienceIndex.astro";
 import ContactForm from "../components/client/ContactForm";
 import Links from "../components/client/Links";
 import { sanityClient } from "sanity:client";
-import { GET_MAINCONTENT, GET_EXPERIENCES } from "@/queries";
+import { GET_MAINCONTENT, GET_EXPERIENCES, GET_SOCIALMEDIA } from "@/queries";
 import type {
   MainContentResponse,
   ExperiencesResponse,
+  SocialMediaResponse,
 } from "@/queries/types";
 
 const mainContent =
   await sanityClient.fetch<MainContentResponse>(GET_MAINCONTENT);
 const experiences =
   await sanityClient.fetch<ExperiencesResponse>(GET_EXPERIENCES);
+const socials = await sanityClient.fetch<SocialMediaResponse>(GET_SOCIALMEDIA);
 ---
 
-<BaseLayout>
+<BaseLayout
+  nav={[
+    { label: "About", id: "about-me" },
+    { label: "Experience", id: "experience" },
+    { label: "Contact", id: "contact-me" },
+  ]}
+>
   <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="text" name="name" />
     <input type="email" name="email" />
@@ -45,6 +53,7 @@ const experiences =
       <AboutSection
         aboutMe={mainContent.gist}
         email={mainContent.email}
+        socials={socials}
         currently="building product features at Userflow x Beamer"
       />
     </Fragment>
@@ -69,6 +78,7 @@ const experiences =
     </Fragment>
   </SectionWrapper>
 
+  <!-- Temporarily removed until I can figure out a better way to present this section
   <SectionWrapper id="what-i-do">
     <Fragment slot="header">
       <Heading>What I Do</Heading>
@@ -76,7 +86,7 @@ const experiences =
     <Fragment slot="content">
       <WhatIDo centerContent />
     </Fragment>
-  </SectionWrapper>
+  </SectionWrapper> -->
 
   <SectionWrapper id="contact-me">
     <Fragment slot="header">

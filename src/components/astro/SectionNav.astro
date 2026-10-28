@@ -1,0 +1,128 @@
+---
+/**
+ * Section navigation that appears once the hero has scrolled out of view.
+ * Desktop: a row of links at the top left, the current one marked with a dot.
+ * Phone: a bottom row of the same links. Hidden again while the footer is in view.
+ */
+export interface SectionNavItem {
+  label: string;
+  id: string;
+}
+
+interface Props {
+  items: SectionNavItem[];
+}
+
+const { items } = Astro.props;
+
+const linkClasses =
+  "group flex items-center gap-3 text-neutral-500 transition-colors duration-200 hover:text-white aria-[current=true]:text-white";
+const dotClasses =
+  "h-2 w-2 shrink-0 rounded-full border border-current transition-all duration-200 group-hover:border-blue-300 group-aria-[current=true]:border-blue-300 group-aria-[current=true]:bg-blue-300 group-aria-[current=true]:shadow-[0_0_10px_rgba(147,197,253,0.6)]";
+---
+
+<nav
+  aria-label="Sections"
+  data-section-nav
+  data-visible="false"
+  class="fixed z-40 transition-[opacity,translate] duration-300 ease-out
+    data-[visible=false]:pointer-events-none data-[visible=false]:opacity-0
+    lg:left-10 lg:top-6 lg:data-[visible=false]:-translate-y-2
+    max-lg:inset-x-0 max-lg:bottom-0 max-lg:bg-neutral-950 max-lg:pb-[env(safe-area-inset-bottom)] max-lg:data-[visible=false]:translate-y-full
+    motion-reduce:transition-none"
+>
+  <ul class="flex items-center lg:gap-6 max-lg:justify-center max-lg:gap-8 max-lg:px-6 max-lg:py-3">
+    {
+      items.map((item) => (
+        <li>
+          <a
+            href={`#${item.id}`}
+            data-section-link={item.id}
+            class:list={[linkClasses, "flex-row-reverse gap-2"]}
+          >
+            <span
+              class="font-mono text-xs lg:rounded-md lg:bg-neutral-950/90 lg:px-2 lg:py-1"
+            >
+              {item.label}
+            </span>
+            <span aria-hidden="true" class={dotClasses} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-section-nav]");
+  const hero = document.querySelector<HTMLElement>("[data-hero]");
+  const footer = document.querySelector<HTMLElement>("footer");
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"),
+  );
+  const sections = links
+    .map((link) => document.getElementById(link.dataset.sectionLink ?? ""))
+    .filter((el): el is HTMLElement => Boolean(el));
+
+  if (nav && hero && links.length) {
+    // Visible between the hero and the footer.
+    let heroPassed = false;
+    let footerShown = false;
+    const sync = () => {
+      nav.dataset.visible = String(heroPassed && !footerShown);
+    };
+    new IntersectionObserver(([entry]) => {
+      heroPassed = !entry.isIntersecting && entry.boundingClientRect.bottom < 0;
+      sync();
+    }).observe(hero);
+    if (footer) {
+      new IntersectionObserver(([entry]) => {
+        footerShown = entry.isIntersecting;
+        sync();
+      }).observe(footer);
+    }
+
+    // Scroll spy: the section crossing a line ~35% down the viewport is current.
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const line = window.innerHeight * 0.35;
+      let best: HTMLElement | null = null;
+      let bestDist = Infinity;
+      for (const section of sections) {
+        const { top, bottom } = section.getBoundingClientRect();
+        const dist =
+          top <= line && bottom >= line
+            ? 0
+            : Math.min(Math.abs(top - line), Math.abs(bottom - line));
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = section;
+        }
+      }
+      for (const link of links) {
+        if (best && link.dataset.sectionLink === best.id)
+          link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      }
+    };
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+
+    for (const link of links) {
+      link.addEventListener("click", (event) => {
+        const target = document.getElementById(link.dataset.sectionLink ?? "");
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.replaceState(null, "", `#${target.id}`);
+      });
+    }
+  }
+</script>

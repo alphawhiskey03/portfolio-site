@@ -74,3 +74,16 @@ export const GET_SOCIALMEDIA = `*[_type=="social-media"] | order(order asc) {
     packageName
   }
 }`;
+
+export const GET_RESUME = `{
+  "main": *[_type=="main-content"][0]{ email, mobile, role, "aboutMe": about_me },
+  "experiences": *[_type=="experience"] | order(start_date desc){
+    "orgName": org_name,
+    role,
+    "startDate": start_date,
+    "endDate": end_date,
+    body,
+    "technologies": technologies[]->title
+  },
+  "socials": *[_type=="social-media" && main == true] | order(order asc){ title, link }
+}`;

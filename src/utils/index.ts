@@ -56,3 +56,7 @@ export const getFormattedDateAndExperience = (
     duration,
   };
 };
+
+/** "https://www.linkedin.com/in/x/" -> "linkedin.com/in/x" */
+export const prettyUrl = (href: string) =>
+  href.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");

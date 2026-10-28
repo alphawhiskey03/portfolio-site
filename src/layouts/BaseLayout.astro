@@ -1,17 +1,23 @@
 ---
 import "../styles/global.css";
 import { NeuroNoiseBackground } from "../components/client/NeuroNoiseBackground";
+import SectionNav, {
+  type SectionNavItem,
+} from "../components/astro/SectionNav.astro";
 
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  /** Sections to list in the floating nav. Omit to render no nav. */
+  nav?: SectionNavItem[];
 }
 
 const {
   title = "Vignesh Shanmugavelu | Software Development Engineer",
   description = "Full-Stack Engineer (4 years exp) building web apps, SDKs, and browser extensions with a focus on practical AI engineering. Based in Coimbatore, India.",
   ogImage = "/images/portfolio-banner.png",
+  nav,
 } = Astro.props;
 
 const canonicalURL = Astro.url.href;
@@ -81,6 +87,7 @@ const personSchema = {
   </head>
   <body>
     <NeuroNoiseBackground client:idle />
+    {nav && <SectionNav items={nav} />}
     <main class="w-full min-h-screen">
       <div class="p-6 lg:p-10">
         <slot />
